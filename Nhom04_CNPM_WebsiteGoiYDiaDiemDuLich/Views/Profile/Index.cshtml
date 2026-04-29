@@ -1,0 +1,368 @@
+﻿<!--@{
+    ViewBag.Title = "Trang cá nhân";
+}
+
+<div class="container py-4" style="max-width: 900px;">
+
+    <h2 class="fw-bold mb-4">
+        <i class="fa fa-user-circle"></i> Trang cá nhân
+    </h2>-->
+<!-- MENU TABS -->
+<!--<ul class="nav nav-tabs mb-4" id="profileTab">
+    <li class="nav-item">
+        <a class="nav-link active" data-bs-toggle="tab" href="#info">
+            <i class="fa fa-id-card"></i> Thông tin tài khoản
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" data-bs-toggle="tab" href="#history">
+            <i class="fa fa-history"></i> Lịch sử tìm kiếm
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" data-bs-toggle="tab" href="#plans">
+            <i class="fa fa-calendar-check"></i> Kế hoạch đã tạo
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" data-bs-toggle="tab" href="#saved">
+            <i class="fa fa-heart"></i> Địa điểm đã lưu
+        </a>
+    </li>
+</ul>
+
+<div class="tab-content">-->
+<!-- 9.1 Thông tin tài khoản -->
+<!--<div class="tab-pane fade show active" id="info">
+    <div class="card shadow-sm border-0 mb-4">
+        <div class="card-body">
+
+            <h5 class="fw-bold mb-3">Thông tin tài khoản</h5>
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label class="form-label">Họ tên</label>
+                    <input class="form-control form-control-lg" value="Nguyễn Văn A" readonly />
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label">Email</label>
+                    <input class="form-control form-control-lg" value="example@gmail.com" readonly />
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Ngày tham gia</label>
+                <input class="form-control form-control-lg" value="12/10/2024" readonly />
+            </div>
+
+            <button class="btn btn-primary">
+                <i class="fa fa-edit"></i> Chỉnh sửa thông tin
+            </button>
+
+        </div>
+    </div>
+</div>-->
+<!-- 9.2 Lịch sử tìm kiếm -->
+<!--<div class="tab-pane fade" id="history">
+    <div class="card shadow-sm border-0 mb-4">
+        <div class="card-body">
+
+            <h5 class="fw-bold mb-3">Lịch sử tìm kiếm</h5>
+
+            <ul class="list-group">
+                <li class="list-group-item d-flex justify-content-between">
+                    <span>Du lịch biển - ngân sách 3 triệu</span>
+                    <span class="text-muted">Hôm qua</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between">
+                    <span>Địa điểm gần Hà Nội</span>
+                    <span class="text-muted">2 ngày trước</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between">
+                    <span>Du lịch nghỉ dưỡng</span>
+                    <span class="text-muted">5 ngày trước</span>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</div>-->
+<!-- 9.3 Kế hoạch đã tạo -->
+<!--<div class="tab-pane fade" id="plans">
+
+    <div class="card shadow-sm border-0 mb-4">
+        <div class="card-body">
+
+            <h5 class="fw-bold mb-3">Kế hoạch đã tạo</h5>
+
+            <div class="list-group">
+
+                <a href="/Planner/View/1" class="list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h6 class="mb-1">Kế hoạch Đà Lạt 3N2Đ</h6>
+                        <small class="text-muted">12/01/2025</small>
+                    </div>
+                    <small>Chi phí: 3.500.000 VNĐ</small>
+                </a>
+
+                <a href="/Planner/View/2" class="list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h6 class="mb-1">Kế hoạch Vũng Tàu cuối tuần</h6>
+                        <small class="text-muted">20/12/2024</small>
+                    </div>
+                    <small>Chi phí: 1.800.000 VNĐ</small>
+                </a>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>-->
+<!-- 9.4 Địa điểm đã lưu -->
+<!--<div class="tab-pane fade" id="saved">
+
+            <div class="card shadow-sm border-0 mb-4">
+                <div class="card-body">
+
+                    <h5 class="fw-bold mb-3">Địa điểm đã lưu</h5>
+
+                    <div class="row g-3">
+
+                        <div class="col-md-6">
+                            <div class="card shadow-sm h-100">
+                                <img src="https://picsum.photos/400/250" class="card-img-top rounded-top" />
+                                <div class="card-body">
+                                    <h6 class="fw-bold">Đà Nẵng</h6>
+                                    <a class="btn btn-outline-primary btn-sm" href="/Travel/Details/1">Xem chi tiết</a>
+                                    <button class="btn btn-danger btn-sm float-end">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="card shadow-sm h-100">
+                                <img src="https://picsum.photos/400/251" class="card-img-top rounded-top" />
+                                <div class="card-body">
+                                    <h6 class="fw-bold">Nha Trang</h6>
+                                    <a class="btn btn-outline-primary btn-sm" href="/Travel/Details/2">Xem chi tiết</a>
+                                    <button class="btn btn-danger btn-sm float-end">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>-->
+
+@model Nhom04_CNPM_WebsiteGoiYDiaDiemDuLich.Models.ViewModels.ProfileViewModel
+@{
+    ViewBag.Title = "Trang cá nhân";
+}
+<div class="container py-4" style="max-width: 900px;">
+
+    <h2 class="fw-bold mb-4">
+        <i class="fa fa-user-circle"></i> Trang cá nhân
+    </h2>
+
+    <!-- MENU TABS -->
+    <ul class="nav nav-tabs mb-4" id="profileTab">
+        <li class="nav-item">
+            <a class="nav-link active" data-bs-toggle="tab" href="#info">
+                <i class="fa fa-id-card"></i> Thông tin tài khoản
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="tab" href="#history">
+                <i class="fa fa-history"></i> Lịch sử tìm kiếm
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="tab" href="#plans">
+                <i class="fa fa-calendar-check"></i> Kế hoạch đã tạo
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="tab" href="#saved">
+                <i class="fa fa-heart"></i> Địa điểm đã lưu
+            </a>
+        </li>
+    </ul>
+
+
+    <div class="tab-content">
+
+        <!-- 9.1 THÔNG TIN TÀI KHOẢN -->
+        <div class="tab-pane fade show active" id="info">
+            <div class="card shadow-sm border-0 mb-4">
+                <div class="card-body">
+
+                    <h5 class="fw-bold mb-3">Thông tin tài khoản</h5>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Họ tên</label>
+                            <input class="form-control form-control-lg"
+                                   value="@Model.UserInfo.FullName" readonly />
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Email</label>
+                            <input class="form-control form-control-lg"
+                                   value="@Model.UserInfo.Email" readonly />
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Ngày tham gia</label>
+                        <input class="form-control form-control-lg"
+                               value="@Model.UserInfo.CreatedAt.ToString("dd/MM/yyyy")" readonly />
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <!-- 9.2 LỊCH SỬ TÌM KIẾM -->
+        <div class="tab-pane fade" id="history">
+
+            <div class="card shadow-sm border-0 mb-4">
+                <div class="card-body">
+
+                    <h5 class="fw-bold mb-3">Lịch sử tìm kiếm</h5>
+
+                    @if (Model.SearchHistories == null || !Model.SearchHistories.Any())
+                    {
+                        <p class="text-muted">Chưa có lịch sử tìm kiếm.</p>
+                    }
+                    else
+                    {
+                        <ul class="list-group">
+
+                            @foreach (var h in Model.SearchHistories)
+                            {
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <span>@h.Keyword</span>
+                                    <span class="text-muted">@h.CreatedAt.ToString("dd/MM/yyyy HH:mm")</span>
+                                </li>
+                            }
+
+                        </ul>
+                    }
+
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- 9.3 KẾ HOẠCH ĐÃ TẠO -->
+        <div class="tab-pane fade" id="plans">
+
+            <div class="card shadow-sm border-0 mb-4">
+                <div class="card-body">
+
+                    <h5 class="fw-bold mb-3">Kế hoạch đã tạo</h5>
+
+                    @if (Model.Plans == null || !Model.Plans.Any())
+                    {
+                        <p class="text-muted">Bạn chưa tạo kế hoạch nào.</p>
+                    }
+                    else
+                    {
+                <div class="list-group">
+                    @foreach (var p in Model.Plans)
+                    {
+                        @*<a href="/Planner/View/@p.PlanId" class="list-group-item list-group-item-action">*@
+
+                        @*<a href="/Planner/Public/@Model.PlanTokens[p.PlanId]" class="list-group-item list-group-item-action">*@
+                        <a href="/Planner/Public?token=@Model.PlanTokens[p.PlanId]" class="list-group-item list-group-item-action">
+
+                            <div class="d-flex w-100 justify-content-between">
+                                <h6 class="mb-1">@p.Title</h6>
+                                @*<small class="text-muted">@p.CreatedAt?.ToString("dd/MM/yyyy")</small>*@
+                                <small class="text-muted">@p.CreatedAt.ToString()</small>
+                            </div>
+                            <small>Chi phí: @((p.TotalCost ?? 0).ToString("#,##0")) VNĐ</small>
+                        </a>
+                    }
+                </div>
+                    }
+
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- 9.4 ĐỊA ĐIỂM ĐÃ LƯU -->
+        <div class="tab-pane fade" id="saved">
+
+            <div class="card shadow-sm border-0 mb-4">
+                <div class="card-body">
+
+                    <h5 class="fw-bold mb-3">Địa điểm đã lưu</h5>
+
+                    @if (Model.FavoritePlaces == null || !Model.FavoritePlaces.Any())
+                    {
+                        <p class="text-muted">Bạn chưa lưu địa điểm nào.</p>
+                    }
+                    else
+                    {
+                        <div class="row g-3">
+
+                            @foreach (var place in Model.FavoritePlaces)
+                            {
+                                var img = place.PlaceImages.FirstOrDefault()?.ImageUrl
+                                          ?? "https://picsum.photos/400/250";
+
+                                <div class="col-md-6">
+                                    <div class="card shadow-sm h-100">
+
+                                        <img src="@img" class="card-img-top rounded-top"
+                                             style="height: 220px; object-fit: cover;" />
+
+                                        <div class="card-body">
+                                            <h6 class="fw-bold">@place.Title</h6>
+
+                                            <a class="btn btn-outline-primary btn-sm"
+                                               href="/Travel/Details/@place.PlaceId">Xem chi tiết</a>
+
+                                            <a class="btn btn-danger btn-sm float-end"
+                                               href="/User/RemoveFavorite/@place.PlaceId">
+                                                <i class="fa fa-trash"></i>
+                                            </a>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            }
+
+                        </div>
+                    }
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>

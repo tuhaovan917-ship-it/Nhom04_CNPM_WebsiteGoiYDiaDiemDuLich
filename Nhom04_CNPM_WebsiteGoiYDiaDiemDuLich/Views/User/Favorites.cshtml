@@ -1,0 +1,101 @@
+﻿<!--@{
+    ViewBag.Title = "Danh sách yêu thích";
+}
+
+<div class="container py-4">
+
+    <h2 class="fw-bold mb-4">
+        <i class="fa fa-heart text-danger"></i> Danh sách địa điểm yêu thích
+    </h2>
+
+    <div class="row row-cols-1 row-cols-md-3 g-4">-->
+@* Loop giả *@
+<!--@for (int i = 1; i <= 6; i++)
+        {
+            <div class="col">
+                <div class="card h-100 shadow-sm border-0">
+
+                    <img src="https://picsum.photos/500/300?random=@i"
+                         class="card-img-top" />
+
+                    <div class="card-body">
+
+                        <h5 class="fw-bold">Địa điểm @i</h5>
+                        <p class="text-muted">Mô tả ngắn về địa điểm du lịch…</p>
+
+                        <div class="d-flex justify-content-between mt-3">
+
+                            <a href="/Travel/Details/@i" class="btn btn-outline-primary btn-sm">
+                                <i class="fa fa-info-circle"></i> Xem
+                            </a>
+
+                            <button class="btn btn-danger btn-sm">
+                                <i class="fa fa-trash"></i> Bỏ yêu thích
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        }
+
+    </div>
+
+</div>-->
+
+@model List<Nhom04_CNPM_WebsiteGoiYDiaDiemDuLich.Models.FavoritePlace>
+
+@{
+    ViewBag.Title = "Danh sách yêu thích";
+}
+
+<div class="container py-4">
+
+    <h2 class="fw-bold mb-4">
+        <i class="fa fa-heart text-danger"></i> Danh sách địa điểm yêu thích
+    </h2>
+
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+
+        @foreach (var fav in Model)
+        {
+            <div class="col">
+                <div class="card h-100 shadow-sm border-0">
+
+                    <!-- Ảnh chính từ bảng PlaceImages nếu có -->
+                    <img src="@(fav.Place.PlaceImages.FirstOrDefault()?.ImageUrl
+                                ?? "https://picsum.photos/500/300?random=" + fav.PlaceId)"
+                         class="card-img-top" />
+
+                    <div class="card-body">
+
+                        <h5 class="fw-bold">@fav.Place.Title</h5>
+                        <p class="text-muted">@fav.Place.ShortDescription</p>
+
+                        <div class="d-flex justify-content-between mt-3">
+
+                            <a href="/Travel/Details/@fav.PlaceId"
+                               class="btn btn-outline-primary btn-sm">
+                                <i class="fa fa-info-circle"></i> Xem
+                            </a>
+
+                            <form action="/User/RemoveFavorite" method="post">
+                                <input type="hidden" name="favoriteId" value="@fav.FavoriteId" />
+                                <button class="btn btn-danger btn-sm">
+                                    <i class="fa fa-trash"></i> Bỏ yêu thích
+                                </button>
+                            </form>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        }
+
+    </div>
+
+</div>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="1574e60085a545809101826e07e24949" Name="Diagram1">
+        <EntityTypeShape EntityType="TravelSuggestModel.CompareSessionItem" Width="1.5" PointX="5.25" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TravelSuggestModel.CompareSession" Width="1.5" PointX="3" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TravelSuggestModel.FavoritePlace" Width="1.5" PointX="5.25" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TravelSuggestModel.PlaceImage" Width="1.5" PointX="5.25" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TravelSuggestModel.Place" Width="1.5" PointX="3" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TravelSuggestModel.PlaceTag" Width="1.5" PointX="8.25" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TravelSuggestModel.PlaceType" Width="1.5" PointX="0.75" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TravelSuggestModel.PlanItem" Width="1.5" PointX="8.25" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="TravelSuggestModel.PlanShare" Width="1.5" PointX="8.25" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TravelSuggestModel.Review" Width="1.5" PointX="8.25" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TravelSuggestModel.SearchHistory" Width="1.5" PointX="5.25" PointY="18.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TravelSuggestModel.Tag" Width="1.5" PointX="6" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TravelSuggestModel.TravelPlan" Width="1.5" PointX="6" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TravelSuggestModel.User" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
+        <AssociationConnector Association="TravelSuggestModel.FK_CompareItems_Places" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelSuggestModel.FK_CompareItems_Sessions" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelSuggestModel.FK_FavoritePlaces_Places" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelSuggestModel.FK_FavoritePlaces_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelSuggestModel.FK_PlaceImages_Places" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelSuggestModel.FK_Places_PlaceTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelSuggestModel.FK_PlaceTags_Places" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelSuggestModel.FK_PlanItems_Places" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelSuggestModel.FK_Reviews_Places" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelSuggestModel.FK_PlaceTags_Tags" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelSuggestModel.FK_PlanItems_TravelPlans" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelSuggestModel.FK_PlanShares_TravelPlans" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelSuggestModel.FK_Reviews_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelSuggestModel.FK_SearchHistory_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelSuggestModel.FK_TravelPlans_Users" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="TravelSuggestModel.PasswordReset" Width="1.5" PointX="5.25" PointY="22.125" />
+        <AssociationConnector Association="TravelSuggestModel.FK_PasswordResets_Users" />
+        <EntityTypeShape EntityType="TravelSuggestModel.BlogPostPlace" Width="1.5" PointX="7.5" PointY="17.5" />
+        <EntityTypeShape EntityType="TravelSuggestModel.BlogPost" Width="1.5" PointX="3.625" PointY="25.75" />
+        <AssociationConnector Association="TravelSuggestModel.FK_BlogPostPlaces_Places" />
+        <AssociationConnector Association="TravelSuggestModel.FK_BlogPostPlaces_Posts" />
+        <AssociationConnector Association="TravelSuggestModel.FK_BlogPosts_Users" />
+        <EntityTypeShape EntityType="TravelSuggestModel.Contact" Width="1.5" PointX="10.375" PointY="0.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

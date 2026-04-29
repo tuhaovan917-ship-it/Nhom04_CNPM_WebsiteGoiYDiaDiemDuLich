@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Nhom04_CNPM_WebsiteGoiYDiaDiemDuLich.Models.User>
+@{
+    ViewBag.Title = "Quản lý người dùng";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h3 class="fw-bold mb-3">Danh sách người dùng</h3>
+
+<table class="table table-bordered table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Họ tên</th>
+            <th>Email</th>
+            <th>Quyền</th>
+            <th>Trạng thái</th>
+            <th>Ngày tạo</th>
+            <th width="120">Thao tác</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var u in Model)
+        {
+            <tr>
+                <td>@u.UserId</td>
+                <td>@u.FullName</td>
+                <td>@u.Email</td>
+                <td>
+                    <span class="badge @(u.Role == "Admin" ? "bg-danger" : "bg-secondary")">
+                        @u.Role
+                    </span>
+                </td>
+                <td>
+                    @(u.IsEmailConfirmed ? "Hoạt động" : "Chưa xác minh")
+                </td>
+                <td>@u.CreatedAt.ToString("dd/MM/yyyy")</td>
+                <td>
+                    <a href="/Admin/Users/Edit/@u.UserId"
+                       class="btn btn-sm btn-primary">
+                        <i class="fa fa-edit">Sửa</i>
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

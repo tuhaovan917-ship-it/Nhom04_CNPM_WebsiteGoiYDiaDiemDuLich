@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Nhom04_CNPM_WebsiteGoiYDiaDiemDuLich.Models.Review>
+@{
+    ViewBag.Title = "Quản lý bình luận";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h3 class="fw-bold mb-3">Danh sách bình luận</h3>
+
+<table class="table table-bordered table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Người dùng</th>
+            <th>Địa điểm</th>
+            <th>Đánh giá</th>
+            <th>Bình luận</th>
+            <th>Ngày tạo</th>
+            <th width="120">Thao tác</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var r in Model)
+        {
+            <tr>
+                <td>@r.ReviewId</td>
+                <td>@(r.User != null ? r.User.FullName : "Ẩn danh")</td>
+                <td>@r.Place.Title</td>
+                <td>
+                    <span class="badge bg-warning text-dark">
+                        @r.Rating ★
+                    </span>
+                </td>
+                <td style="max-width:250px">
+                    @if (string.IsNullOrEmpty(r.Comment))
+                    {
+                        <i>(Không có nội dung)</i>
+                    }
+                    else
+                    {
+                        @r.Comment
+                    }
+                </td>
+                <td>@r.CreatedAt.ToString("dd/MM/yyyy HH:mm")</td>
+                <td>
+                    <a href="/Admin/Reviews/Delete/@r.ReviewId"
+                       class="btn btn-sm btn-danger"
+                       onclick="return confirm('Xóa bình luận này?')">
+                        <i class="fa fa-trash">Xóa</i>
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

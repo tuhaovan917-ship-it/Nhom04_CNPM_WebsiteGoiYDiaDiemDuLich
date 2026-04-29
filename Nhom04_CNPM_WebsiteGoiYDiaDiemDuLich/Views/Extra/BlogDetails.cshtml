@@ -1,0 +1,83 @@
+﻿@model Nhom04_CNPM_WebsiteGoiYDiaDiemDuLich.Models.BlogPost
+
+@{
+    ViewBag.Title = Model.Title;
+}
+
+<div class="container py-4">
+
+    <!-- TITLE -->
+    <h2 class="fw-bold mb-2">
+        <i class="fa fa-newspaper"></i> @Model.Title
+    </h2>
+
+    <!-- META -->
+    <p class="text-muted mb-4">
+        <i class="fa fa-user"></i>
+        @Model.User.FullName
+        &nbsp;|&nbsp;
+        <i class="fa fa-calendar"></i>
+        @Model.CreatedAt.ToString("dd/MM/yyyy")
+        &nbsp;|&nbsp;
+        <i class="fa fa-eye"></i>
+        @Model.ViewCount lượt xem
+    </p>
+
+    <!-- THUMBNAIL -->
+    @if (!string.IsNullOrEmpty(Model.Thumbnail))
+    {
+        string img = Model.Thumbnail.StartsWith("http")
+            ? Model.Thumbnail
+            : Url.Content("~/Content/Images/" + Model.Thumbnail);
+
+        <img src="@img" class="img-fluid rounded mb-4" />
+    }
+
+    <!-- SUMMARY -->
+    @if (!string.IsNullOrEmpty(Model.Summary))
+    {
+        <div class="alert alert-secondary">
+            @Model.Summary
+        </div>
+    }
+
+    <!-- CONTENT -->
+    <div class="blog-content">
+        @Html.Raw(Model.Content)
+    </div>
+
+    <!-- RELATED PLACES -->
+    @if (Model.BlogPostPlaces.Any())
+    {
+        <hr />
+        <h4 class="fw-bold mt-4">
+            <i class="fa fa-map-marker-alt"></i> Địa điểm liên quan
+        </h4>
+
+        <div class="row row-cols-1 row-cols-md-3 g-4 mt-2">
+            @foreach (var bp in Model.BlogPostPlaces)
+            {
+                <div class="col">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="fw-bold">@bp.Place.Title</h5>
+                            <p class="text-muted">
+                                @bp.Place.ShortDescription
+                            </p>
+                            <a href="@Url.Action("Details", "Travel", new { id = bp.Place.PlaceId })"
+                               class="btn btn-outline-primary btn-sm">
+                                Xem địa điểm
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+
+    <hr />
+    <a href="@Url.Action("Blog", "Extra")" class="btn btn-secondary mt-3">
+        <i class="fa fa-arrow-left"></i> Quay lại Blog
+    </a>
+
+</div>

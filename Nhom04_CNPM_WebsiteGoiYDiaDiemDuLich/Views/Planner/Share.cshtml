@@ -1,0 +1,154 @@
+﻿<!--@{
+    ViewBag.Title = "Chia sẻ kế hoạch du lịch";
+}
+
+<div class="container py-4" style="max-width: 800px;">
+
+    <h2 class="fw-bold mb-4">
+        <i class="fa fa-share-alt"></i> Chia sẻ kế hoạch du lịch
+    </h2>-->
+<!-- Thông tin kế hoạch -->
+<!--<div class="card shadow-sm border-0 mb-4">
+    <div class="card-body">
+        <h5 class="fw-bold">Thông tin kế hoạch</h5>
+
+        <p><strong>Địa điểm:</strong> Đà Lạt</p>
+        <p><strong>Thời gian:</strong> 12/01/2025 - 15/01/2025</p>
+        <p><strong>Chi phí dự kiến:</strong> 3.500.000 VNĐ</p>
+
+        <a href="/Planner/View/1" class="btn btn-outline-primary btn-sm">
+            <i class="fa fa-eye"></i> Xem kế hoạch
+        </a>
+    </div>
+</div>-->
+<!-- Tạo link chia sẻ -->
+<!--<div class="card shadow-sm border-0 mb-4">
+    <div class="card-body">
+
+        <h5 class="fw-bold mb-3">
+            <i class="fa fa-link"></i> Tạo link chia sẻ
+        </h5>
+
+        <div class="input-group mb-3">
+            <input type="text" id="shareLink" class="form-control form-control-lg"
+                   value="https://mytravel.com/plan/12345"
+                   readonly />
+            <button class="btn btn-primary" onclick="copyLink()">
+                <i class="fa fa-copy"></i>
+            </button>
+        </div>
+
+        <small class="text-muted">Link này có thể gửi cho bạn bè của bạn.</small>
+
+    </div>
+</div>-->
+<!-- Social sharing -->
+<!--<div class="card shadow-sm border-0 mb-4">
+    <div class="card-body">
+
+        <h5 class="fw-bold mb-3">
+            <i class="fa fa-share-square"></i> Chia sẻ qua mạng xã hội
+        </h5>
+
+        <div class="d-flex gap-3">
+
+            <a href="#" class="btn btn-primary">
+                <i class="fa fa-facebook"></i> Facebook
+            </a>
+
+            <a href="#" class="btn btn-info text-white">
+                <i class="fa fa-comment"></i> Messenger
+            </a>
+
+            <a href="#" class="btn btn-success">
+                <i class="fa fa-mobile"></i> Zalo
+            </a>
+
+        </div>
+
+    </div>
+</div>-->
+<!-- Script copy -->
+<!--<script>
+        function copyLink() {
+            var copyText = document.getElementById("shareLink");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value);
+            alert("Đã sao chép link chia sẻ!");
+        }
+    </script>
+
+</div>-->
+
+@model Nhom04_CNPM_WebsiteGoiYDiaDiemDuLich.Models.TravelPlan
+@{
+    ViewBag.Title = "Chia sẻ kế hoạch du lịch";
+    string shareUrl = ViewBag.ShareUrl as string;
+    string token = ViewBag.ShareToken as string;
+}
+
+<div class="container py-4" style="max-width: 800px;">
+
+    <h2 class="fw-bold mb-4">
+        <i class="fa fa-share-alt"></i> Chia sẻ kế hoạch du lịch
+    </h2>
+
+    <!-- Thông tin kế hoạch -->
+    <div class="card shadow-sm border-0 mb-4">
+        <div class="card-body">
+            <h5 class="fw-bold">Thông tin kế hoạch</h5>
+
+            <p><strong>Tiêu đề:</strong> @Model.Title</p>
+
+            @*<p>
+            <strong>Địa điểm:</strong>
+            @(Model.PlanItems.FirstOrDefault()?.Place?.Title ?? "Không có dữ liệu")
+        </p>*@
+
+            <p><strong>Địa điểm:</strong></p>
+            <ul>
+                @foreach (var item in Model.PlanItems.OrderBy(p => p.DayNo))
+                {
+                    <li>@(item.Place != null ? item.Place.Title : "Không có dữ liệu")</li>
+                }
+            </ul>
+
+            <p>
+                <strong>Thời gian:</strong>
+                @string.Format("{0:dd/MM/yyyy} - {1:dd/MM/yyyy}", Model.StartDate, Model.EndDate)
+            </p>
+
+            <p><strong>Tổng chi phí:</strong> @String.Format("{0:N0} VNĐ", Model.TotalCost)</p>
+
+            <a href="@Url.Action("Public", "Planner", new { token = token })"
+               class="btn btn-outline-primary btn-sm">
+                <i class="fa fa-eye"></i> Xem kế hoạch
+            </a>
+        </div>
+    </div>
+
+    <!-- Link share -->
+    <div class="card shadow-sm border-0 mb-4">
+        <div class="card-body">
+            <h5 class="fw-bold mb-3"><i class="fa fa-link"></i> Link chia sẻ</h5>
+
+            <div class="input-group mb-3">
+                <input id="shareLink" class="form-control form-control-lg" value="@shareUrl" readonly />
+                <button class="btn btn-primary" onclick="copyLink()"><i class="fa fa-copy"></i></button>
+            </div>
+
+            <small class="text-muted">Gửi link này cho bạn bè.</small>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    function copyLink() {
+        var copyText = document.getElementById("shareLink");
+        copyText.select();
+        navigator.clipboard.writeText(copyText.value);
+        alert("Đã sao chép!");
+    }
+</script>

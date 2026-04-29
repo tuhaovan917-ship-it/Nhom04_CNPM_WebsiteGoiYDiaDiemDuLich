@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Nhom04_CNPM_WebsiteGoiYDiaDiemDuLich.Models.Place>
+@{
+    ViewBag.Title = "Quản lý địa điểm";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h3 class="fw-bold mb-3">Quản lý địa điểm</h3>
+
+<a href="/Admin/Places/Create" class="btn btn-primary mb-3">
+    <i class="fa fa-plus"></i> Thêm địa điểm
+</a>
+
+<table class="table table-bordered table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>Tên</th>
+            <th>Loại</th>
+            <th>Thành phố</th>
+            <th>Chi phí TB</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var p in Model)
+        {
+            <tr>
+                <td>@p.Title</td>
+                <td>@p.PlaceType.Name</td>
+                <td>@p.City</td>
+                <td>@(((int?)p.AvgCost)?.ToString("N0")) đ</td>
+                <td width="180">
+                    <a href="/Admin/Places/Edit/@p.PlaceId" class="btn btn-sm btn-warning">
+                        <i class="fa fa-edit">Sửa</i>
+                    </a>
+                    <a href="/Admin/Places/Delete/@p.PlaceId" class="btn btn-sm btn-danger">
+                        <i class="fa fa-trash">Xóa</i>
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

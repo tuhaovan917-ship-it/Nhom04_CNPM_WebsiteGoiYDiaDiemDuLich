@@ -1,0 +1,18 @@
+﻿@model Nhom04_CNPM_WebsiteGoiYDiaDiemDuLich.Models.Place
+@{
+    ViewBag.Title = "Xóa địa điểm";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h4>Bạn có chắc muốn xóa địa điểm này?</h4>
+
+<div class="alert alert-warning">
+    <b>@Model.Title</b>
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <button class="btn btn-danger">Xóa</button>
+    <a href="/Admin/Places" class="btn btn-secondary">Hủy</a>
+}

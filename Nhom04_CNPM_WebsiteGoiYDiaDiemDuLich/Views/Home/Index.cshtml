@@ -1,0 +1,209 @@
+﻿@model Nhom04_CNPM_WebsiteGoiYDiaDiemDuLich.Models.ViewModels.HomeViewModel
+@{
+    ViewBag.Title = "Trang chủ";
+}
+
+<!-- ================= BANNER ================= -->
+<div class="container mt-4">
+    <div class="p-5 mb-4 bg-light rounded-3 shadow-sm">
+        <div class="container-fluid py-5">
+            <h1 class="display-5 fw-bold">Khám phá địa điểm du lịch phù hợp với bạn</h1>
+            <p class="col-md-8 fs-5 mt-3">
+                Hệ thống gợi ý thông minh giúp bạn tìm điểm đến theo sở thích, ngân sách và thời gian.
+            </p>
+            <a href="/Travel/Preferences" class="btn btn-primary btn-lg">
+                Bắt đầu ngay
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- ================= QUICK SEARCH ================= -->
+<div class="container mb-5">
+    <h4 class="fw-bold mb-3">Tìm kiếm nhanh</h4>
+    <form action="/Travel/Recommendations" method="get">
+        <div class="input-group input-group-lg shadow-sm">
+            <input type="text" class="form-control" name="q" placeholder="Nhập địa điểm, từ khóa..." />
+            <button class="btn btn-primary" type="submit">
+                <i class="fa fa-search"></i> Tìm kiếm
+            </button>
+        </div>
+    </form>
+</div>
+
+<!-- ================= TRENDING ================= -->
+<div class="container mb-5">
+    <h4 class="fw-bold mb-4">
+        🔥 Gợi ý theo xu hướng
+        <span class="text-muted fs-6">(được quan tâm gần đây)</span>
+    </h4>
+
+    <div class="row g-4">
+        @if (Model.TrendingPlaces == null || !Model.TrendingPlaces.Any())
+        {
+            <div class="col-12">
+                <p class="text-muted fst-italic">
+                    Chưa có dữ liệu tương tác gần đây.
+                </p>
+            </div>
+        }
+        else
+        {
+            foreach (var p in Model.TrendingPlaces)
+            {
+                //var img = p.PlaceImages.FirstOrDefault(i => i.IsPrimary)?.ImageUrl
+                //          ?? "/Content/Images/no-image.jpg";
+
+                string img = "https://picsum.photos/500/300"; // fallback
+
+                if (p.PlaceImages != null && p.PlaceImages.Any())
+                {
+                    var image = p.PlaceImages.FirstOrDefault(i => i.IsPrimary)
+                                ?? p.PlaceImages.First();
+
+                    if (!string.IsNullOrEmpty(image.ImageUrl))
+                    {
+                        img = image.ImageUrl.StartsWith("http")
+                            ? image.ImageUrl
+                            : Url.Content("~/Content/Images/" + image.ImageUrl);
+                    }
+                }
+
+                <div class="col-md-4">
+                    <a href="/Travel/Details/@p.PlaceId" class="text-decoration-none text-dark">
+                        <div class="card shadow-sm border-0 h-100">
+                            <img src="@img" class="card-img-top" style="height:220px;object-fit:cover;" />
+                            <div class="card-body">
+                                <span class="badge bg-danger mb-2">🔥 Trending</span>
+                                <h5 class="card-title fw-bold">@p.Title</h5>
+                                <p class="text-muted mb-0">
+                                    @((p.ShortDescription ?? "").Length > 80
+                                        ? p.ShortDescription.Substring(0, 80) + "..."
+                                        : p.ShortDescription)
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            }
+        }
+    </div>
+</div>
+
+<!-- ================= POPULAR ================= -->
+<div class="container mb-5">
+    <h4 class="fw-bold mb-4">
+        ⭐ Địa điểm phổ biến
+        <span class="text-muted fs-6">(được yêu thích nhiều nhất)</span>
+    </h4>
+
+    <div class="row g-4">
+        @if (Model.PopularPlaces == null || !Model.PopularPlaces.Any())
+        {
+            <div class="col-12">
+                <p class="text-muted fst-italic">
+                    Chưa có dữ liệu yêu thích.
+                </p>
+            </div>
+        }
+        else
+        {
+            foreach (var p in Model.PopularPlaces)
+            {
+                //var img = p.PlaceImages.FirstOrDefault(i => i.IsPrimary)?.ImageUrl
+                //          ?? "/Content/Images/no-image.jpg";
+
+                string img = "https://picsum.photos/500/300"; // fallback
+
+                if (p.PlaceImages != null && p.PlaceImages.Any())
+                {
+                    var image = p.PlaceImages.FirstOrDefault(i => i.IsPrimary)
+                                ?? p.PlaceImages.First();
+
+                    if (!string.IsNullOrEmpty(image.ImageUrl))
+                    {
+                        img = image.ImageUrl.StartsWith("http")
+                            ? image.ImageUrl
+                            : Url.Content("~/Content/Images/" + image.ImageUrl);
+                    }
+                }
+
+                <div class="col-md-4">
+                    <a href="/Travel/Details/@p.PlaceId" class="text-decoration-none text-dark">
+                        <div class="card shadow-sm border-0 h-100">
+                            <img src="@img" class="card-img-top" style="height:220px;object-fit:cover;" />
+                            <div class="card-body">
+                                <span class="badge bg-warning text-dark mb-2">⭐ Popular</span>
+                                <h5 class="card-title fw-bold">@p.Title</h5>
+                                <p class="text-muted mb-0">
+                                    @((p.ShortDescription ?? "").Length > 80
+                                        ? p.ShortDescription.Substring(0, 80) + "..."
+                                        : p.ShortDescription)
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            }
+        }
+    </div>
+</div>
+
+<!-- ================= TOP RATED ================= -->
+<div class="container mb-5">
+    <h4 class="fw-bold mb-4">
+        🏆 Đánh giá cao
+        <span class="text-muted fs-6">(chất lượng hàng đầu)</span>
+    </h4>
+
+    <div class="row g-4">
+        @if (Model.TopRatedPlaces == null || !Model.TopRatedPlaces.Any())
+        {
+            <div class="col-12">
+                <p class="text-muted fst-italic">
+                    Chưa có dữ liệu đánh giá.
+                </p>
+            </div>
+        }
+        else
+        {
+            foreach (var p in Model.TopRatedPlaces)
+            {
+                string img = "https://picsum.photos/500/300"; // fallback
+
+                if (p.PlaceImages != null && p.PlaceImages.Any())
+                {
+                    var image = p.PlaceImages.FirstOrDefault(i => i.IsPrimary)
+                                ?? p.PlaceImages.First();
+
+                    if (!string.IsNullOrEmpty(image.ImageUrl))
+                    {
+                        img = image.ImageUrl.StartsWith("http")
+                            ? image.ImageUrl
+                            : Url.Content("~/Content/Images/" + image.ImageUrl);
+                    }
+                }
+
+                //var img = p.PlaceImages.FirstOrDefault(i => i.IsPrimary)?.ImageUrl
+                //      ?? "/Content/Images/no-image.jpg";
+
+                <div class="col-md-4">
+                    <a href="/Travel/Details/@p.PlaceId" class="text-decoration-none text-dark">
+                        <div class="card shadow-sm border-0 h-100">
+                            <img src="@img" class="card-img-top" style="height:220px;object-fit:cover;" />
+                            <div class="card-body">
+                                <span class="badge bg-success mb-2">🏆 Top Rated</span>
+                                <h5 class="card-title fw-bold">@p.Title</h5>
+                                <p class="text-muted mb-0">
+                                    @((p.ShortDescription ?? "").Length > 80
+                                        ? p.ShortDescription.Substring(0, 80) + "..."
+                                        : p.ShortDescription)
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            }
+        }
+    </div>
+</div>

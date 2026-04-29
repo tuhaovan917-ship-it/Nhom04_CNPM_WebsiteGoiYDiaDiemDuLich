@@ -1,0 +1,1339 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="TravelSuggestModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BlogPostPlaces">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PostId" Type="int" Nullable="false" />
+          <Property Name="PlaceId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BlogPosts">
+          <Key>
+            <PropertyRef Name="PostId" />
+          </Key>
+          <Property Name="PostId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Slug" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Summary" Type="nvarchar" MaxLength="500" />
+          <Property Name="Content" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Thumbnail" Type="nvarchar" MaxLength="1000" />
+          <Property Name="AuthorId" Type="int" Nullable="false" />
+          <Property Name="ViewCount" Type="int" Nullable="false" />
+          <Property Name="IsPublished" Type="bit" Nullable="false" />
+          <Property Name="CreatedAt" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="UpdatedAt" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="CompareSessionItems">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SessionId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PlaceId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CompareSessions">
+          <Key>
+            <PropertyRef Name="SessionId" />
+          </Key>
+          <Property Name="SessionId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="CreatedAt" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Contacts">
+          <Key>
+            <PropertyRef Name="ContactId" />
+          </Key>
+          <Property Name="ContactId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Message" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CreatedAt" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="IsRead" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FavoritePlaces">
+          <Key>
+            <PropertyRef Name="FavoriteId" />
+          </Key>
+          <Property Name="FavoriteId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="PlaceId" Type="int" Nullable="false" />
+          <Property Name="CreatedAt" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PasswordResets">
+          <Key>
+            <PropertyRef Name="ResetId" />
+          </Key>
+          <Property Name="ResetId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="Token" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ExpireAt" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="IsUsed" Type="bit" Nullable="false" />
+          <Property Name="CreatedAt" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PlaceImages">
+          <Key>
+            <PropertyRef Name="ImageId" />
+          </Key>
+          <Property Name="ImageId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PlaceId" Type="int" Nullable="false" />
+          <Property Name="ImageUrl" Type="nvarchar" MaxLength="1000" Nullable="false" />
+          <Property Name="IsPrimary" Type="bit" Nullable="false" />
+          <Property Name="SortOrder" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Places">
+          <Key>
+            <PropertyRef Name="PlaceId" />
+          </Key>
+          <Property Name="PlaceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="ShortDescription" Type="nvarchar" MaxLength="500" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="PlaceTypeId" Type="int" />
+          <Property Name="AvgRating" Type="decimal" Precision="3" Scale="2" />
+          <Property Name="AvgCost" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Latitude" Type="decimal" Precision="9" Scale="6" />
+          <Property Name="Longitude" Type="decimal" Precision="9" Scale="6" />
+          <Property Name="Address" Type="nvarchar" MaxLength="500" />
+          <Property Name="City" Type="nvarchar" MaxLength="150" />
+          <Property Name="CreatedAt" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="UpdatedAt" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="PlaceTags">
+          <Key>
+            <PropertyRef Name="PlaceTagId" />
+          </Key>
+          <Property Name="PlaceTagId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PlaceId" Type="int" Nullable="false" />
+          <Property Name="TagId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PlaceTypes">
+          <Key>
+            <PropertyRef Name="PlaceTypeId" />
+          </Key>
+          <Property Name="PlaceTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="PlanItems">
+          <Key>
+            <PropertyRef Name="PlanItemId" />
+          </Key>
+          <Property Name="PlanItemId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PlanId" Type="int" Nullable="false" />
+          <Property Name="PlaceId" Type="int" />
+          <Property Name="DayNo" Type="int" />
+          <Property Name="Notes" Type="nvarchar" MaxLength="1000" />
+        </EntityType>
+        <EntityType Name="PlanShares">
+          <Key>
+            <PropertyRef Name="ShareId" />
+          </Key>
+          <Property Name="ShareId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PlanId" Type="int" Nullable="false" />
+          <Property Name="ShareToken" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="CreatedAt" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="ExpiredAt" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="Reviews">
+          <Key>
+            <PropertyRef Name="ReviewId" />
+          </Key>
+          <Property Name="ReviewId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PlaceId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="Rating" Type="decimal" Precision="2" Scale="1" Nullable="false" />
+          <Property Name="Comment" Type="nvarchar(max)" />
+          <Property Name="CreatedAt" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SearchHistory">
+          <Key>
+            <PropertyRef Name="SearchId" />
+          </Key>
+          <Property Name="SearchId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="Keyword" Type="nvarchar" MaxLength="500" />
+          <Property Name="FiltersJson" Type="nvarchar(max)" />
+          <Property Name="CreatedAt" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tags">
+          <Key>
+            <PropertyRef Name="TagId" />
+          </Key>
+          <Property Name="TagId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TravelPlans">
+          <Key>
+            <PropertyRef Name="PlanId" />
+          </Key>
+          <Property Name="PlanId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="300" />
+          <Property Name="StartDate" Type="date" />
+          <Property Name="EndDate" Type="date" />
+          <Property Name="MoveCost" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="StayCost" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="FoodCost" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="OtherCost" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="TotalCost" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Itinerary" Type="nvarchar(max)" />
+          <Property Name="CreatedAt" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar" MaxLength="500" />
+          <Property Name="Role" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsEmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="CreatedAt" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="UpdatedAt" Type="datetime2" Precision="7" />
+          <Property Name="Salt" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <Association Name="FK_BlogPostPlaces_Places">
+          <End Role="Places" Type="Self.Places" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="BlogPostPlaces" Type="Self.BlogPostPlaces" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Places">
+              <PropertyRef Name="PlaceId" />
+            </Principal>
+            <Dependent Role="BlogPostPlaces">
+              <PropertyRef Name="PlaceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BlogPostPlaces_Posts">
+          <End Role="BlogPosts" Type="Self.BlogPosts" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="BlogPostPlaces" Type="Self.BlogPostPlaces" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BlogPosts">
+              <PropertyRef Name="PostId" />
+            </Principal>
+            <Dependent Role="BlogPostPlaces">
+              <PropertyRef Name="PostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BlogPosts_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="BlogPosts" Type="Self.BlogPosts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="BlogPosts">
+              <PropertyRef Name="AuthorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompareItems_Places">
+          <End Role="Places" Type="Self.Places" Multiplicity="1" />
+          <End Role="CompareSessionItems" Type="Self.CompareSessionItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Places">
+              <PropertyRef Name="PlaceId" />
+            </Principal>
+            <Dependent Role="CompareSessionItems">
+              <PropertyRef Name="PlaceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompareItems_Sessions">
+          <End Role="CompareSessions" Type="Self.CompareSessions" Multiplicity="1" />
+          <End Role="CompareSessionItems" Type="Self.CompareSessionItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompareSessions">
+              <PropertyRef Name="SessionId" />
+            </Principal>
+            <Dependent Role="CompareSessionItems">
+              <PropertyRef Name="SessionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FavoritePlaces_Places">
+          <End Role="Places" Type="Self.Places" Multiplicity="1" />
+          <End Role="FavoritePlaces" Type="Self.FavoritePlaces" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Places">
+              <PropertyRef Name="PlaceId" />
+            </Principal>
+            <Dependent Role="FavoritePlaces">
+              <PropertyRef Name="PlaceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FavoritePlaces_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="FavoritePlaces" Type="Self.FavoritePlaces" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="FavoritePlaces">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PasswordResets_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PasswordResets" Type="Self.PasswordResets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="PasswordResets">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlaceImages_Places">
+          <End Role="Places" Type="Self.Places" Multiplicity="1" />
+          <End Role="PlaceImages" Type="Self.PlaceImages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Places">
+              <PropertyRef Name="PlaceId" />
+            </Principal>
+            <Dependent Role="PlaceImages">
+              <PropertyRef Name="PlaceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Places_PlaceTypes">
+          <End Role="PlaceTypes" Type="Self.PlaceTypes" Multiplicity="0..1" />
+          <End Role="Places" Type="Self.Places" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PlaceTypes">
+              <PropertyRef Name="PlaceTypeId" />
+            </Principal>
+            <Dependent Role="Places">
+              <PropertyRef Name="PlaceTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlaceTags_Places">
+          <End Role="Places" Type="Self.Places" Multiplicity="1" />
+          <End Role="PlaceTags" Type="Self.PlaceTags" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Places">
+              <PropertyRef Name="PlaceId" />
+            </Principal>
+            <Dependent Role="PlaceTags">
+              <PropertyRef Name="PlaceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlaceTags_Tags">
+          <End Role="Tags" Type="Self.Tags" Multiplicity="1" />
+          <End Role="PlaceTags" Type="Self.PlaceTags" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tags">
+              <PropertyRef Name="TagId" />
+            </Principal>
+            <Dependent Role="PlaceTags">
+              <PropertyRef Name="TagId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlanItems_Places">
+          <End Role="Places" Type="Self.Places" Multiplicity="0..1" />
+          <End Role="PlanItems" Type="Self.PlanItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Places">
+              <PropertyRef Name="PlaceId" />
+            </Principal>
+            <Dependent Role="PlanItems">
+              <PropertyRef Name="PlaceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlanItems_TravelPlans">
+          <End Role="TravelPlans" Type="Self.TravelPlans" Multiplicity="1" />
+          <End Role="PlanItems" Type="Self.PlanItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TravelPlans">
+              <PropertyRef Name="PlanId" />
+            </Principal>
+            <Dependent Role="PlanItems">
+              <PropertyRef Name="PlanId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlanShares_TravelPlans">
+          <End Role="TravelPlans" Type="Self.TravelPlans" Multiplicity="1" />
+          <End Role="PlanShares" Type="Self.PlanShares" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TravelPlans">
+              <PropertyRef Name="PlanId" />
+            </Principal>
+            <Dependent Role="PlanShares">
+              <PropertyRef Name="PlanId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reviews_Places">
+          <End Role="Places" Type="Self.Places" Multiplicity="1" />
+          <End Role="Reviews" Type="Self.Reviews" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Places">
+              <PropertyRef Name="PlaceId" />
+            </Principal>
+            <Dependent Role="Reviews">
+              <PropertyRef Name="PlaceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reviews_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Reviews" Type="Self.Reviews" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Reviews">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SearchHistory_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="SearchHistory" Type="Self.SearchHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="SearchHistory">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TravelPlans_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="TravelPlans" Type="Self.TravelPlans" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="TravelPlans">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TravelSuggestModelStoreContainer">
+          <EntitySet Name="BlogPostPlaces" EntityType="Self.BlogPostPlaces" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BlogPosts" EntityType="Self.BlogPosts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CompareSessionItems" EntityType="Self.CompareSessionItems" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CompareSessions" EntityType="Self.CompareSessions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Contacts" EntityType="Self.Contacts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FavoritePlaces" EntityType="Self.FavoritePlaces" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PasswordResets" EntityType="Self.PasswordResets" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PlaceImages" EntityType="Self.PlaceImages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Places" EntityType="Self.Places" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PlaceTags" EntityType="Self.PlaceTags" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PlaceTypes" EntityType="Self.PlaceTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PlanItems" EntityType="Self.PlanItems" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PlanShares" EntityType="Self.PlanShares" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reviews" EntityType="Self.Reviews" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SearchHistory" EntityType="Self.SearchHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tags" EntityType="Self.Tags" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TravelPlans" EntityType="Self.TravelPlans" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_BlogPostPlaces_Places" Association="Self.FK_BlogPostPlaces_Places">
+            <End Role="Places" EntitySet="Places" />
+            <End Role="BlogPostPlaces" EntitySet="BlogPostPlaces" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BlogPostPlaces_Posts" Association="Self.FK_BlogPostPlaces_Posts">
+            <End Role="BlogPosts" EntitySet="BlogPosts" />
+            <End Role="BlogPostPlaces" EntitySet="BlogPostPlaces" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BlogPosts_Users" Association="Self.FK_BlogPosts_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="BlogPosts" EntitySet="BlogPosts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompareItems_Places" Association="Self.FK_CompareItems_Places">
+            <End Role="Places" EntitySet="Places" />
+            <End Role="CompareSessionItems" EntitySet="CompareSessionItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompareItems_Sessions" Association="Self.FK_CompareItems_Sessions">
+            <End Role="CompareSessions" EntitySet="CompareSessions" />
+            <End Role="CompareSessionItems" EntitySet="CompareSessionItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FavoritePlaces_Places" Association="Self.FK_FavoritePlaces_Places">
+            <End Role="Places" EntitySet="Places" />
+            <End Role="FavoritePlaces" EntitySet="FavoritePlaces" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FavoritePlaces_Users" Association="Self.FK_FavoritePlaces_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="FavoritePlaces" EntitySet="FavoritePlaces" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PasswordResets_Users" Association="Self.FK_PasswordResets_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="PasswordResets" EntitySet="PasswordResets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlaceImages_Places" Association="Self.FK_PlaceImages_Places">
+            <End Role="Places" EntitySet="Places" />
+            <End Role="PlaceImages" EntitySet="PlaceImages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Places_PlaceTypes" Association="Self.FK_Places_PlaceTypes">
+            <End Role="PlaceTypes" EntitySet="PlaceTypes" />
+            <End Role="Places" EntitySet="Places" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlaceTags_Places" Association="Self.FK_PlaceTags_Places">
+            <End Role="Places" EntitySet="Places" />
+            <End Role="PlaceTags" EntitySet="PlaceTags" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlaceTags_Tags" Association="Self.FK_PlaceTags_Tags">
+            <End Role="Tags" EntitySet="Tags" />
+            <End Role="PlaceTags" EntitySet="PlaceTags" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlanItems_Places" Association="Self.FK_PlanItems_Places">
+            <End Role="Places" EntitySet="Places" />
+            <End Role="PlanItems" EntitySet="PlanItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlanItems_TravelPlans" Association="Self.FK_PlanItems_TravelPlans">
+            <End Role="TravelPlans" EntitySet="TravelPlans" />
+            <End Role="PlanItems" EntitySet="PlanItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlanShares_TravelPlans" Association="Self.FK_PlanShares_TravelPlans">
+            <End Role="TravelPlans" EntitySet="TravelPlans" />
+            <End Role="PlanShares" EntitySet="PlanShares" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reviews_Places" Association="Self.FK_Reviews_Places">
+            <End Role="Places" EntitySet="Places" />
+            <End Role="Reviews" EntitySet="Reviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reviews_Users" Association="Self.FK_Reviews_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Reviews" EntitySet="Reviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SearchHistory_Users" Association="Self.FK_SearchHistory_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="SearchHistory" EntitySet="SearchHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TravelPlans_Users" Association="Self.FK_TravelPlans_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="TravelPlans" EntitySet="TravelPlans" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TravelSuggestModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CompareSessionItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SessionId" Type="Guid" Nullable="false" />
+          <Property Name="PlaceId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Place" Relationship="Self.FK_CompareItems_Places" FromRole="CompareSessionItems" ToRole="Places" />
+          <NavigationProperty Name="CompareSession" Relationship="Self.FK_CompareItems_Sessions" FromRole="CompareSessionItems" ToRole="CompareSessions" />
+        </EntityType>
+        <EntityType Name="CompareSession">
+          <Key>
+            <PropertyRef Name="SessionId" />
+          </Key>
+          <Property Name="SessionId" Type="Guid" Nullable="false" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="7" />
+          <NavigationProperty Name="CompareSessionItems" Relationship="Self.FK_CompareItems_Sessions" FromRole="CompareSessions" ToRole="CompareSessionItems" />
+        </EntityType>
+        <EntityType Name="FavoritePlace">
+          <Key>
+            <PropertyRef Name="FavoriteId" />
+          </Key>
+          <Property Name="FavoriteId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="PlaceId" Type="Int32" Nullable="false" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="7" />
+          <NavigationProperty Name="Place" Relationship="Self.FK_FavoritePlaces_Places" FromRole="FavoritePlaces" ToRole="Places" />
+          <NavigationProperty Name="User" Relationship="Self.FK_FavoritePlaces_Users" FromRole="FavoritePlaces" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="PlaceImage">
+          <Key>
+            <PropertyRef Name="ImageId" />
+          </Key>
+          <Property Name="ImageId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PlaceId" Type="Int32" Nullable="false" />
+          <Property Name="ImageUrl" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsPrimary" Type="Boolean" Nullable="false" />
+          <Property Name="SortOrder" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Place" Relationship="Self.FK_PlaceImages_Places" FromRole="PlaceImages" ToRole="Places" />
+        </EntityType>
+        <EntityType Name="Place">
+          <Key>
+            <PropertyRef Name="PlaceId" />
+          </Key>
+          <Property Name="PlaceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ShortDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PlaceTypeId" Type="Int32" />
+          <Property Name="AvgRating" Type="Decimal" Precision="3" Scale="2" />
+          <Property Name="AvgCost" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Latitude" Type="Decimal" Precision="9" Scale="6" />
+          <Property Name="Longitude" Type="Decimal" Precision="9" Scale="6" />
+          <Property Name="Address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="UpdatedAt" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="CompareSessionItems" Relationship="Self.FK_CompareItems_Places" FromRole="Places" ToRole="CompareSessionItems" />
+          <NavigationProperty Name="FavoritePlaces" Relationship="Self.FK_FavoritePlaces_Places" FromRole="Places" ToRole="FavoritePlaces" />
+          <NavigationProperty Name="PlaceImages" Relationship="Self.FK_PlaceImages_Places" FromRole="Places" ToRole="PlaceImages" />
+          <NavigationProperty Name="PlaceType" Relationship="Self.FK_Places_PlaceTypes" FromRole="Places" ToRole="PlaceTypes" />
+          <NavigationProperty Name="PlaceTags" Relationship="Self.FK_PlaceTags_Places" FromRole="Places" ToRole="PlaceTags" />
+          <NavigationProperty Name="PlanItems" Relationship="Self.FK_PlanItems_Places" FromRole="Places" ToRole="PlanItems" />
+          <NavigationProperty Name="Reviews" Relationship="Self.FK_Reviews_Places" FromRole="Places" ToRole="Reviews" />
+          <NavigationProperty Name="BlogPostPlaces" Relationship="TravelSuggestModel.FK_BlogPostPlaces_Places" FromRole="Place" ToRole="BlogPostPlace" />
+        </EntityType>
+        <EntityType Name="PlaceTag">
+          <Key>
+            <PropertyRef Name="PlaceTagId" />
+          </Key>
+          <Property Name="PlaceTagId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PlaceId" Type="Int32" Nullable="false" />
+          <Property Name="TagId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Place" Relationship="Self.FK_PlaceTags_Places" FromRole="PlaceTags" ToRole="Places" />
+          <NavigationProperty Name="Tag" Relationship="Self.FK_PlaceTags_Tags" FromRole="PlaceTags" ToRole="Tags" />
+        </EntityType>
+        <EntityType Name="PlaceType">
+          <Key>
+            <PropertyRef Name="PlaceTypeId" />
+          </Key>
+          <Property Name="PlaceTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Places" Relationship="Self.FK_Places_PlaceTypes" FromRole="PlaceTypes" ToRole="Places" />
+        </EntityType>
+        <EntityType Name="PlanItem">
+          <Key>
+            <PropertyRef Name="PlanItemId" />
+          </Key>
+          <Property Name="PlanItemId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PlanId" Type="Int32" Nullable="false" />
+          <Property Name="PlaceId" Type="Int32" />
+          <Property Name="DayNo" Type="Int32" />
+          <Property Name="Notes" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Place" Relationship="Self.FK_PlanItems_Places" FromRole="PlanItems" ToRole="Places" />
+          <NavigationProperty Name="TravelPlan" Relationship="Self.FK_PlanItems_TravelPlans" FromRole="PlanItems" ToRole="TravelPlans" />
+        </EntityType>
+        <EntityType Name="PlanShare">
+          <Key>
+            <PropertyRef Name="ShareId" />
+          </Key>
+          <Property Name="ShareId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PlanId" Type="Int32" Nullable="false" />
+          <Property Name="ShareToken" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="ExpiredAt" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="TravelPlan" Relationship="Self.FK_PlanShares_TravelPlans" FromRole="PlanShares" ToRole="TravelPlans" />
+        </EntityType>
+        <EntityType Name="Review">
+          <Key>
+            <PropertyRef Name="ReviewId" />
+          </Key>
+          <Property Name="ReviewId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PlaceId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="Rating" Type="Decimal" Precision="2" Scale="1" Nullable="false" />
+          <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="7" />
+          <NavigationProperty Name="Place" Relationship="Self.FK_Reviews_Places" FromRole="Reviews" ToRole="Places" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Reviews_Users" FromRole="Reviews" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="SearchHistory">
+          <Key>
+            <PropertyRef Name="SearchId" />
+          </Key>
+          <Property Name="SearchId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="Keyword" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="FiltersJson" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="7" />
+          <NavigationProperty Name="User" Relationship="Self.FK_SearchHistory_Users" FromRole="SearchHistory" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Tag">
+          <Key>
+            <PropertyRef Name="TagId" />
+          </Key>
+          <Property Name="TagId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="PlaceTags" Relationship="Self.FK_PlaceTags_Tags" FromRole="Tags" ToRole="PlaceTags" />
+        </EntityType>
+        <EntityType Name="TravelPlan">
+          <Key>
+            <PropertyRef Name="PlanId" />
+          </Key>
+          <Property Name="PlanId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="StartDate" Type="DateTime" Precision="0" />
+          <Property Name="EndDate" Type="DateTime" Precision="0" />
+          <Property Name="MoveCost" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="StayCost" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="FoodCost" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="OtherCost" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TotalCost" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Itinerary" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="7" />
+          <NavigationProperty Name="PlanItems" Relationship="Self.FK_PlanItems_TravelPlans" FromRole="TravelPlans" ToRole="PlanItems" />
+          <NavigationProperty Name="PlanShares" Relationship="Self.FK_PlanShares_TravelPlans" FromRole="TravelPlans" ToRole="PlanShares" />
+          <NavigationProperty Name="User" Relationship="Self.FK_TravelPlans_Users" FromRole="TravelPlans" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FullName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsEmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="UpdatedAt" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="FavoritePlaces" Relationship="Self.FK_FavoritePlaces_Users" FromRole="Users" ToRole="FavoritePlaces" />
+          <NavigationProperty Name="Reviews" Relationship="Self.FK_Reviews_Users" FromRole="Users" ToRole="Reviews" />
+          <NavigationProperty Name="SearchHistories" Relationship="Self.FK_SearchHistory_Users" FromRole="Users" ToRole="SearchHistory" />
+          <NavigationProperty Name="TravelPlans" Relationship="Self.FK_TravelPlans_Users" FromRole="Users" ToRole="TravelPlans" />
+          <Property Name="Salt" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PasswordResets" Relationship="TravelSuggestModel.FK_PasswordResets_Users" FromRole="User" ToRole="PasswordReset" />
+          <NavigationProperty Name="BlogPosts" Relationship="TravelSuggestModel.FK_BlogPosts_Users" FromRole="User" ToRole="BlogPost" />
+        </EntityType>
+        <Association Name="FK_CompareItems_Places">
+          <End Role="Places" Type="Self.Place" Multiplicity="1" />
+          <End Role="CompareSessionItems" Type="Self.CompareSessionItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Places">
+              <PropertyRef Name="PlaceId" />
+            </Principal>
+            <Dependent Role="CompareSessionItems">
+              <PropertyRef Name="PlaceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompareItems_Sessions">
+          <End Role="CompareSessions" Type="Self.CompareSession" Multiplicity="1" />
+          <End Role="CompareSessionItems" Type="Self.CompareSessionItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompareSessions">
+              <PropertyRef Name="SessionId" />
+            </Principal>
+            <Dependent Role="CompareSessionItems">
+              <PropertyRef Name="SessionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FavoritePlaces_Places">
+          <End Role="Places" Type="Self.Place" Multiplicity="1" />
+          <End Role="FavoritePlaces" Type="Self.FavoritePlace" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Places">
+              <PropertyRef Name="PlaceId" />
+            </Principal>
+            <Dependent Role="FavoritePlaces">
+              <PropertyRef Name="PlaceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FavoritePlaces_Users">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="FavoritePlaces" Type="Self.FavoritePlace" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="FavoritePlaces">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlaceImages_Places">
+          <End Role="Places" Type="Self.Place" Multiplicity="1" />
+          <End Role="PlaceImages" Type="Self.PlaceImage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Places">
+              <PropertyRef Name="PlaceId" />
+            </Principal>
+            <Dependent Role="PlaceImages">
+              <PropertyRef Name="PlaceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Places_PlaceTypes">
+          <End Role="PlaceTypes" Type="Self.PlaceType" Multiplicity="0..1" />
+          <End Role="Places" Type="Self.Place" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PlaceTypes">
+              <PropertyRef Name="PlaceTypeId" />
+            </Principal>
+            <Dependent Role="Places">
+              <PropertyRef Name="PlaceTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlaceTags_Places">
+          <End Role="Places" Type="Self.Place" Multiplicity="1" />
+          <End Role="PlaceTags" Type="Self.PlaceTag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Places">
+              <PropertyRef Name="PlaceId" />
+            </Principal>
+            <Dependent Role="PlaceTags">
+              <PropertyRef Name="PlaceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlanItems_Places">
+          <End Role="Places" Type="Self.Place" Multiplicity="0..1" />
+          <End Role="PlanItems" Type="Self.PlanItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Places">
+              <PropertyRef Name="PlaceId" />
+            </Principal>
+            <Dependent Role="PlanItems">
+              <PropertyRef Name="PlaceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reviews_Places">
+          <End Role="Places" Type="Self.Place" Multiplicity="1" />
+          <End Role="Reviews" Type="Self.Review" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Places">
+              <PropertyRef Name="PlaceId" />
+            </Principal>
+            <Dependent Role="Reviews">
+              <PropertyRef Name="PlaceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlaceTags_Tags">
+          <End Role="Tags" Type="Self.Tag" Multiplicity="1" />
+          <End Role="PlaceTags" Type="Self.PlaceTag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tags">
+              <PropertyRef Name="TagId" />
+            </Principal>
+            <Dependent Role="PlaceTags">
+              <PropertyRef Name="TagId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlanItems_TravelPlans">
+          <End Role="TravelPlans" Type="Self.TravelPlan" Multiplicity="1" />
+          <End Role="PlanItems" Type="Self.PlanItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TravelPlans">
+              <PropertyRef Name="PlanId" />
+            </Principal>
+            <Dependent Role="PlanItems">
+              <PropertyRef Name="PlanId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlanShares_TravelPlans">
+          <End Role="TravelPlans" Type="Self.TravelPlan" Multiplicity="1" />
+          <End Role="PlanShares" Type="Self.PlanShare" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TravelPlans">
+              <PropertyRef Name="PlanId" />
+            </Principal>
+            <Dependent Role="PlanShares">
+              <PropertyRef Name="PlanId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reviews_Users">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Reviews" Type="Self.Review" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Reviews">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SearchHistory_Users">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="SearchHistory" Type="Self.SearchHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="SearchHistory">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TravelPlans_Users">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="TravelPlans" Type="Self.TravelPlan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="TravelPlans">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TravelSuggestEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CompareSessionItems" EntityType="Self.CompareSessionItem" />
+          <EntitySet Name="CompareSessions" EntityType="Self.CompareSession" />
+          <EntitySet Name="FavoritePlaces" EntityType="Self.FavoritePlace" />
+          <EntitySet Name="PlaceImages" EntityType="Self.PlaceImage" />
+          <EntitySet Name="Places" EntityType="Self.Place" />
+          <EntitySet Name="PlaceTags" EntityType="Self.PlaceTag" />
+          <EntitySet Name="PlaceTypes" EntityType="Self.PlaceType" />
+          <EntitySet Name="PlanItems" EntityType="Self.PlanItem" />
+          <EntitySet Name="PlanShares" EntityType="Self.PlanShare" />
+          <EntitySet Name="Reviews" EntityType="Self.Review" />
+          <EntitySet Name="SearchHistories" EntityType="Self.SearchHistory" />
+          <EntitySet Name="Tags" EntityType="Self.Tag" />
+          <EntitySet Name="TravelPlans" EntityType="Self.TravelPlan" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK_CompareItems_Places" Association="Self.FK_CompareItems_Places">
+            <End Role="Places" EntitySet="Places" />
+            <End Role="CompareSessionItems" EntitySet="CompareSessionItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompareItems_Sessions" Association="Self.FK_CompareItems_Sessions">
+            <End Role="CompareSessions" EntitySet="CompareSessions" />
+            <End Role="CompareSessionItems" EntitySet="CompareSessionItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FavoritePlaces_Places" Association="Self.FK_FavoritePlaces_Places">
+            <End Role="Places" EntitySet="Places" />
+            <End Role="FavoritePlaces" EntitySet="FavoritePlaces" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FavoritePlaces_Users" Association="Self.FK_FavoritePlaces_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="FavoritePlaces" EntitySet="FavoritePlaces" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlaceImages_Places" Association="Self.FK_PlaceImages_Places">
+            <End Role="Places" EntitySet="Places" />
+            <End Role="PlaceImages" EntitySet="PlaceImages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Places_PlaceTypes" Association="Self.FK_Places_PlaceTypes">
+            <End Role="PlaceTypes" EntitySet="PlaceTypes" />
+            <End Role="Places" EntitySet="Places" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlaceTags_Places" Association="Self.FK_PlaceTags_Places">
+            <End Role="Places" EntitySet="Places" />
+            <End Role="PlaceTags" EntitySet="PlaceTags" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlanItems_Places" Association="Self.FK_PlanItems_Places">
+            <End Role="Places" EntitySet="Places" />
+            <End Role="PlanItems" EntitySet="PlanItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reviews_Places" Association="Self.FK_Reviews_Places">
+            <End Role="Places" EntitySet="Places" />
+            <End Role="Reviews" EntitySet="Reviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlaceTags_Tags" Association="Self.FK_PlaceTags_Tags">
+            <End Role="Tags" EntitySet="Tags" />
+            <End Role="PlaceTags" EntitySet="PlaceTags" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlanItems_TravelPlans" Association="Self.FK_PlanItems_TravelPlans">
+            <End Role="TravelPlans" EntitySet="TravelPlans" />
+            <End Role="PlanItems" EntitySet="PlanItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlanShares_TravelPlans" Association="Self.FK_PlanShares_TravelPlans">
+            <End Role="TravelPlans" EntitySet="TravelPlans" />
+            <End Role="PlanShares" EntitySet="PlanShares" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reviews_Users" Association="Self.FK_Reviews_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Reviews" EntitySet="Reviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SearchHistory_Users" Association="Self.FK_SearchHistory_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="SearchHistory" EntitySet="SearchHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TravelPlans_Users" Association="Self.FK_TravelPlans_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="TravelPlans" EntitySet="TravelPlans" />
+          </AssociationSet>
+          <EntitySet Name="PasswordResets" EntityType="TravelSuggestModel.PasswordReset" />
+          <AssociationSet Name="FK_PasswordResets_Users" Association="TravelSuggestModel.FK_PasswordResets_Users">
+            <End Role="User" EntitySet="Users" />
+            <End Role="PasswordReset" EntitySet="PasswordResets" />
+          </AssociationSet>
+          <EntitySet Name="BlogPostPlaces" EntityType="TravelSuggestModel.BlogPostPlace" />
+          <EntitySet Name="BlogPosts" EntityType="TravelSuggestModel.BlogPost" />
+          <AssociationSet Name="FK_BlogPostPlaces_Places" Association="TravelSuggestModel.FK_BlogPostPlaces_Places">
+            <End Role="Place" EntitySet="Places" />
+            <End Role="BlogPostPlace" EntitySet="BlogPostPlaces" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BlogPostPlaces_Posts" Association="TravelSuggestModel.FK_BlogPostPlaces_Posts">
+            <End Role="BlogPost" EntitySet="BlogPosts" />
+            <End Role="BlogPostPlace" EntitySet="BlogPostPlaces" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BlogPosts_Users" Association="TravelSuggestModel.FK_BlogPosts_Users">
+            <End Role="User" EntitySet="Users" />
+            <End Role="BlogPost" EntitySet="BlogPosts" />
+          </AssociationSet>
+          <EntitySet Name="Contacts" EntityType="TravelSuggestModel.Contact" />
+        </EntityContainer>
+        <EntityType Name="PasswordReset">
+          <Key>
+            <PropertyRef Name="ResetId" />
+          </Key>
+          <Property Name="ResetId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="Token" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ExpireAt" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="IsUsed" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="7" />
+          <NavigationProperty Name="User" Relationship="TravelSuggestModel.FK_PasswordResets_Users" FromRole="PasswordReset" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_PasswordResets_Users">
+          <End Type="TravelSuggestModel.User" Role="User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="TravelSuggestModel.PasswordReset" Role="PasswordReset" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="PasswordReset">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="BlogPostPlace">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PostId" Type="Int32" Nullable="false" />
+          <Property Name="PlaceId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Place" Relationship="TravelSuggestModel.FK_BlogPostPlaces_Places" FromRole="BlogPostPlace" ToRole="Place" />
+          <NavigationProperty Name="BlogPost" Relationship="TravelSuggestModel.FK_BlogPostPlaces_Posts" FromRole="BlogPostPlace" ToRole="BlogPost" />
+        </EntityType>
+        <EntityType Name="BlogPost">
+          <Key>
+            <PropertyRef Name="PostId" />
+          </Key>
+          <Property Name="PostId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Slug" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Summary" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Content" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Thumbnail" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="AuthorId" Type="Int32" Nullable="false" />
+          <Property Name="ViewCount" Type="Int32" Nullable="false" />
+          <Property Name="IsPublished" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="UpdatedAt" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="BlogPostPlaces" Relationship="TravelSuggestModel.FK_BlogPostPlaces_Posts" FromRole="BlogPost" ToRole="BlogPostPlace" />
+          <NavigationProperty Name="User" Relationship="TravelSuggestModel.FK_BlogPosts_Users" FromRole="BlogPost" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_BlogPostPlaces_Places">
+          <End Type="TravelSuggestModel.Place" Role="Place" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="TravelSuggestModel.BlogPostPlace" Role="BlogPostPlace" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Place">
+              <PropertyRef Name="PlaceId" />
+            </Principal>
+            <Dependent Role="BlogPostPlace">
+              <PropertyRef Name="PlaceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BlogPostPlaces_Posts">
+          <End Type="TravelSuggestModel.BlogPost" Role="BlogPost" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="TravelSuggestModel.BlogPostPlace" Role="BlogPostPlace" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BlogPost">
+              <PropertyRef Name="PostId" />
+            </Principal>
+            <Dependent Role="BlogPostPlace">
+              <PropertyRef Name="PostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BlogPosts_Users">
+          <End Type="TravelSuggestModel.User" Role="User" Multiplicity="1" />
+          <End Type="TravelSuggestModel.BlogPost" Role="BlogPost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="BlogPost">
+              <PropertyRef Name="AuthorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Contact">
+          <Key>
+            <PropertyRef Name="ContactId" />
+          </Key>
+          <Property Name="ContactId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FullName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Message" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="IsRead" Type="Boolean" Nullable="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TravelSuggestModelStoreContainer" CdmEntityContainer="TravelSuggestEntities">
+          <EntitySetMapping Name="CompareSessionItems">
+            <EntityTypeMapping TypeName="TravelSuggestModel.CompareSessionItem">
+              <MappingFragment StoreEntitySet="CompareSessionItems">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="SessionId" ColumnName="SessionId" />
+                <ScalarProperty Name="PlaceId" ColumnName="PlaceId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CompareSessions">
+            <EntityTypeMapping TypeName="TravelSuggestModel.CompareSession">
+              <MappingFragment StoreEntitySet="CompareSessions">
+                <ScalarProperty Name="SessionId" ColumnName="SessionId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FavoritePlaces">
+            <EntityTypeMapping TypeName="TravelSuggestModel.FavoritePlace">
+              <MappingFragment StoreEntitySet="FavoritePlaces">
+                <ScalarProperty Name="FavoriteId" ColumnName="FavoriteId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="PlaceId" ColumnName="PlaceId" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PlaceImages">
+            <EntityTypeMapping TypeName="TravelSuggestModel.PlaceImage">
+              <MappingFragment StoreEntitySet="PlaceImages">
+                <ScalarProperty Name="ImageId" ColumnName="ImageId" />
+                <ScalarProperty Name="PlaceId" ColumnName="PlaceId" />
+                <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+                <ScalarProperty Name="IsPrimary" ColumnName="IsPrimary" />
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Places">
+            <EntityTypeMapping TypeName="TravelSuggestModel.Place">
+              <MappingFragment StoreEntitySet="Places">
+                <ScalarProperty Name="PlaceId" ColumnName="PlaceId" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ShortDescription" ColumnName="ShortDescription" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="PlaceTypeId" ColumnName="PlaceTypeId" />
+                <ScalarProperty Name="AvgRating" ColumnName="AvgRating" />
+                <ScalarProperty Name="AvgCost" ColumnName="AvgCost" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PlaceTags">
+            <EntityTypeMapping TypeName="TravelSuggestModel.PlaceTag">
+              <MappingFragment StoreEntitySet="PlaceTags">
+                <ScalarProperty Name="PlaceTagId" ColumnName="PlaceTagId" />
+                <ScalarProperty Name="PlaceId" ColumnName="PlaceId" />
+                <ScalarProperty Name="TagId" ColumnName="TagId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PlaceTypes">
+            <EntityTypeMapping TypeName="TravelSuggestModel.PlaceType">
+              <MappingFragment StoreEntitySet="PlaceTypes">
+                <ScalarProperty Name="PlaceTypeId" ColumnName="PlaceTypeId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PlanItems">
+            <EntityTypeMapping TypeName="TravelSuggestModel.PlanItem">
+              <MappingFragment StoreEntitySet="PlanItems">
+                <ScalarProperty Name="PlanItemId" ColumnName="PlanItemId" />
+                <ScalarProperty Name="PlanId" ColumnName="PlanId" />
+                <ScalarProperty Name="PlaceId" ColumnName="PlaceId" />
+                <ScalarProperty Name="DayNo" ColumnName="DayNo" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PlanShares">
+            <EntityTypeMapping TypeName="TravelSuggestModel.PlanShare">
+              <MappingFragment StoreEntitySet="PlanShares">
+                <ScalarProperty Name="ShareId" ColumnName="ShareId" />
+                <ScalarProperty Name="PlanId" ColumnName="PlanId" />
+                <ScalarProperty Name="ShareToken" ColumnName="ShareToken" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="ExpiredAt" ColumnName="ExpiredAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reviews">
+            <EntityTypeMapping TypeName="TravelSuggestModel.Review">
+              <MappingFragment StoreEntitySet="Reviews">
+                <ScalarProperty Name="ReviewId" ColumnName="ReviewId" />
+                <ScalarProperty Name="PlaceId" ColumnName="PlaceId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SearchHistories">
+            <EntityTypeMapping TypeName="TravelSuggestModel.SearchHistory">
+              <MappingFragment StoreEntitySet="SearchHistory">
+                <ScalarProperty Name="SearchId" ColumnName="SearchId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Keyword" ColumnName="Keyword" />
+                <ScalarProperty Name="FiltersJson" ColumnName="FiltersJson" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tags">
+            <EntityTypeMapping TypeName="TravelSuggestModel.Tag">
+              <MappingFragment StoreEntitySet="Tags">
+                <ScalarProperty Name="TagId" ColumnName="TagId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TravelPlans">
+            <EntityTypeMapping TypeName="TravelSuggestModel.TravelPlan">
+              <MappingFragment StoreEntitySet="TravelPlans">
+                <ScalarProperty Name="PlanId" ColumnName="PlanId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="MoveCost" ColumnName="MoveCost" />
+                <ScalarProperty Name="StayCost" ColumnName="StayCost" />
+                <ScalarProperty Name="FoodCost" ColumnName="FoodCost" />
+                <ScalarProperty Name="OtherCost" ColumnName="OtherCost" />
+                <ScalarProperty Name="TotalCost" ColumnName="TotalCost" />
+                <ScalarProperty Name="Itinerary" ColumnName="Itinerary" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="TravelSuggestModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Salt" ColumnName="Salt" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="IsEmailConfirmed" ColumnName="IsEmailConfirmed" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PasswordResets">
+            <EntityTypeMapping TypeName="TravelSuggestModel.PasswordReset">
+              <MappingFragment StoreEntitySet="PasswordResets">
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="IsUsed" ColumnName="IsUsed" />
+                <ScalarProperty Name="ExpireAt" ColumnName="ExpireAt" />
+                <ScalarProperty Name="Token" ColumnName="Token" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ResetId" ColumnName="ResetId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BlogPostPlaces">
+            <EntityTypeMapping TypeName="TravelSuggestModel.BlogPostPlace">
+              <MappingFragment StoreEntitySet="BlogPostPlaces">
+                <ScalarProperty Name="PlaceId" ColumnName="PlaceId" />
+                <ScalarProperty Name="PostId" ColumnName="PostId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BlogPosts">
+            <EntityTypeMapping TypeName="TravelSuggestModel.BlogPost">
+              <MappingFragment StoreEntitySet="BlogPosts">
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="IsPublished" ColumnName="IsPublished" />
+                <ScalarProperty Name="ViewCount" ColumnName="ViewCount" />
+                <ScalarProperty Name="AuthorId" ColumnName="AuthorId" />
+                <ScalarProperty Name="Thumbnail" ColumnName="Thumbnail" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="Summary" ColumnName="Summary" />
+                <ScalarProperty Name="Slug" ColumnName="Slug" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="PostId" ColumnName="PostId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contacts">
+            <EntityTypeMapping TypeName="TravelSuggestModel.Contact">
+              <MappingFragment StoreEntitySet="Contacts">
+                <ScalarProperty Name="IsRead" ColumnName="IsRead" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="ContactId" ColumnName="ContactId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,188 @@
+﻿<!--@{
+    ViewBag.Title = "Tạo kế hoạch du lịch";
+}
+
+<div class="container py-4" style="max-width: 900px;">
+
+    <h2 class="fw-bold mb-4">
+        <i class="fa fa-calendar-check"></i> Tạo kế hoạch du lịch
+    </h2>
+
+    <div class="card shadow-sm border-0">
+        <div class="card-body p-4">
+
+            <form>-->
+<!-- 7.2.1 Chọn địa điểm -->
+<!--<h5 class="fw-bold mb-3">1. Chọn địa điểm</h5>
+<select class="form-select form-select-lg mb-4">
+    <option>-- Chọn địa điểm du lịch --</option>
+    <option>Đà Nẵng</option>
+    <option>Vũng Tàu</option>
+    <option>Đà Lạt</option>
+    <option>Nha Trang</option>
+</select>-->
+<!-- 7.2.2 Chọn thời gian -->
+<!--<h5 class="fw-bold mb-3">2. Chọn thời gian</h5>
+<div class="row mb-4">
+    <div class="col-md-6 mb-2">
+        <label class="form-label">Ngày bắt đầu</label>
+        <input type="date" class="form-control form-control-lg" />
+    </div>
+    <div class="col-md-6 mb-2">
+        <label class="form-label">Ngày kết thúc</label>
+        <input type="date" class="form-control form-control-lg" />
+    </div>
+</div>-->
+<!-- 7.2.3 Tính chi phí -->
+<!--<h5 class="fw-bold mb-3">3. Chi phí dự kiến</h5>
+
+<div class="mb-3">
+    <label class="form-label">Chi phí di chuyển</label>
+    <input type="number" class="form-control form-control-lg" placeholder="Ví dụ: 500000" />
+</div>
+
+<div class="mb-3">
+    <label class="form-label">Chi phí lưu trú</label>
+    <input type="number" class="form-control form-control-lg" placeholder="Ví dụ: 1500000" />
+</div>
+
+<div class="mb-3">
+    <label class="form-label">Chi phí ăn uống</label>
+    <input type="number" class="form-control form-control-lg" placeholder="Ví dụ: 600000" />
+</div>
+
+<div class="mb-4">
+    <label class="form-label">Chi phí khác</label>
+    <input type="number" class="form-control form-control-lg" placeholder="Ví dụ: 300000" />
+</div>-->
+<!-- 7.2.4 Gợi ý lịch trình -->
+<!--<h5 class="fw-bold mb-3">4. Gợi ý lịch trình</h5>
+
+<div class="alert alert-info">
+    <i class="fa fa-lightbulb"></i>
+    Lịch trình gợi ý sẽ xuất hiện tự động khi bạn nhập đủ thông tin!
+</div>
+
+<ul class="list-group mb-4">
+    <li class="list-group-item">Ngày 1: Di chuyển – Nhận phòng – Khám phá trung tâm</li>
+    <li class="list-group-item">Ngày 2: Tham quan địa điểm A – B – C</li>
+    <li class="list-group-item">Ngày 3: Thư giãn – Mua sắm – Trả phòng</li>
+</ul>-->
+<!-- 7.2.5 Lưu kế hoạch + Chia sẻ kế hoạch -->
+<!--<div class="text-center d-flex justify-content-center gap-3">
+                    <button type="submit" class="btn btn-success btn-lg px-5">
+                        <i class="fa fa-save"></i> Lưu kế hoạch
+                    </button>
+
+                    <a href="/Planner/Share" class="btn btn-primary btn-lg px-5">
+                        <i class="fa fa-share-alt"></i> Chia sẻ kế hoạch
+                    </a>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+</div>-->
+
+@{
+    ViewBag.Title = "Tạo kế hoạch du lịch";
+    var places = ViewBag.Places as List<Nhom04_CNPM_WebsiteGoiYDiaDiemDuLich.Models.Place>;
+}
+
+<div class="container py-4" style="max-width: 900px;">
+
+    <h2 class="fw-bold mb-4"><i class="fa fa-calendar-check"></i> Tạo kế hoạch du lịch</h2>
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger">@TempData["Error"]</div>
+    }
+
+    @using (Html.BeginForm("CreatePlan", "Planner", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        <h5 class="fw-bold mb-3">1. Chọn thời gian</h5>
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <label>Ngày bắt đầu</label>
+                <input type="date" name="StartDate" id="start" class="form-control form-control-lg" required />
+            </div>
+            <div class="col-md-6">
+                <label>Ngày kết thúc</label>
+                <input type="date" name="EndDate" id="end" class="form-control form-control-lg" required />
+            </div>
+        </div>
+
+        <h5 class="fw-bold mb-3">2. Chọn địa điểm cho từng ngày</h5>
+
+        <div id="dayContainer"></div>
+
+        <script>
+            document.getElementById("end").addEventListener("change", generateDays);
+            document.getElementById("start").addEventListener("change", generateDays);
+
+            function generateDays() {
+                var s = document.getElementById("start").value;
+                var e = document.getElementById("end").value;
+
+                if (!s || !e) return;
+
+                var start = new Date(s);
+                var end = new Date(e);
+
+                if (end < start) return;
+
+                var html = "";
+                var dayNo = 1;
+
+                for (var d = new Date(start); d <= end; d.setDate(d.getDate() + 1)) {
+
+                    html += `
+                        <div class="card border mb-3 p-3">
+                            <h6 class="fw-bold">Ngày ${dayNo} (${d.toLocaleDateString()})</h6>
+
+                            <select class="form-select" name="DayPlaceIds">
+                                <option value="">-- Chọn địa điểm --</option>
+                                ${placesHtml()}
+                            </select>
+                        </div>
+                    `;
+                    dayNo++;
+                }
+
+                document.getElementById("dayContainer").innerHTML = html;
+            }
+
+            function placesHtml() {
+                return `
+                    @foreach (var p in places)
+                    {
+                        @:<option value="@p.PlaceId">@p.Title</option>
+                    }
+                `;
+            }
+        </script>
+
+        <h5 class="fw-bold mt-4 mb-3">3. Chi phí</h5>
+        <input type="text" name="Title" class="form-control mb-3" placeholder="Tên kế hoạch (tuỳ chọn)" />
+
+        <label>Di chuyển</label>
+        <input type="number" name="MoveCost" class="form-control mb-3" />
+
+        <label>Lưu trú</label>
+        <input type="number" name="StayCost" class="form-control mb-3" />
+
+        <label>Ăn uống</label>
+        <input type="number" name="FoodCost" class="form-control mb-3" />
+
+        <label>Khác</label>
+        <input type="number" name="OtherCost" class="form-control mb-4" />
+
+        <div class="text-center">
+            <button class="btn btn-success btn-lg px-5">Lưu kế hoạch</button>
+        </div>
+    }
+</div>

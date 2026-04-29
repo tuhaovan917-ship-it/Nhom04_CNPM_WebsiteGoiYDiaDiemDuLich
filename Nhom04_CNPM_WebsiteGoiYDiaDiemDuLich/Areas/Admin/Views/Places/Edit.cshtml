@@ -1,0 +1,44 @@
+﻿@model Nhom04_CNPM_WebsiteGoiYDiaDiemDuLich.Models.Place
+@{
+    ViewBag.Title = "Thêm địa điểm";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h3 class="fw-bold mb-3">Thêm / Sửa địa điểm</h3>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.PlaceId) <!-- 🔥 RẤT QUAN TRỌNG -->
+
+    <div class="mb-3">
+        <label class="form-label">Tên địa điểm</label>
+        @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Loại hình</label>
+        @Html.DropDownList("PlaceTypeId", null, "-- Chọn loại --", new { @class = "form-select" })
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Thành phố</label>
+        @Html.TextBoxFor(m => m.City, new { @class = "form-control" })
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Chi phí trung bình</label>
+        @Html.TextBoxFor(m => m.AvgCost, new { @class = "form-control" })
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Mô tả</label>
+        @Html.TextAreaFor(m => m.Description, new { @class = "form-control", rows = 5 })
+    </div>
+
+    <button class="btn btn-success">
+        <i class="fa fa-save"></i> Lưu
+    </button>
+
+    <a href="/Admin/Places" class="btn btn-secondary">Quay lại</a>
+}

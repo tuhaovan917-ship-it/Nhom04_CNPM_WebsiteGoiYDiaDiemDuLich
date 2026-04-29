@@ -1,0 +1,98 @@
+﻿@*@{
+        ViewBag.Title = "Blog / Tin tức du lịch";
+    }
+
+    <div class="container py-4">
+
+        <h2 class="fw-bold mb-4">
+            <i class="fa fa-newspaper"></i> Blog / Tin tức du lịch
+        </h2>
+
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+
+            @for (int i = 1; i <= 6; i++)
+            {
+                <div class="col">
+                    <div class="card h-100 shadow-sm border-0">
+                        <img src="https://picsum.photos/500/300?random=@i" class="card-img-top" />
+                        <div class="card-body">
+                            <h5 class="fw-bold">Bài viết @i</h5>
+                            <p class="text-muted">Một bài viết ngắn về kinh nghiệm du lịch, mẹo đi chơi, hoặc review…</p>
+                            <a href="#" class="btn btn-outline-primary btn-sm">
+                                <i class="fa fa-book-open"></i> Đọc thêm
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+
+    </div>*@
+
+@model List<Nhom04_CNPM_WebsiteGoiYDiaDiemDuLich.Models.BlogPost>
+
+@{
+    ViewBag.Title = "Blog / Tin tức du lịch";
+}
+
+<div class="container py-4">
+
+    <h2 class="fw-bold mb-4">
+        <i class="fa fa-newspaper"></i> Blog / Tin tức du lịch
+    </h2>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info">
+            Chưa có bài viết nào được đăng.
+        </div>
+    }
+    else
+    {
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+
+            @foreach (var blog in Model)
+            {
+                <div class="col">
+                    <div class="card h-100 shadow-sm border-0">
+
+                        @{
+                            string img = "https://picsum.photos/500/300";
+
+                            if (!string.IsNullOrEmpty(blog.Thumbnail))
+                            {
+                                img = blog.Thumbnail.StartsWith("http")
+                                    ? blog.Thumbnail
+                                    : Url.Content("~/Content/Images/" + blog.Thumbnail);
+                            }
+                        }
+
+                        <img src="@img" class="card-img-top" />
+
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="fw-bold">@blog.Title</h5>
+
+                            <p class="text-muted">
+                                @blog.Summary
+                            </p>
+
+                            <small class="text-muted mb-3">
+                                Tác giả: @blog.User.FullName <br />
+                                Ngày đăng: @blog.CreatedAt.ToString("dd/MM/yyyy")
+                            </small>
+
+                            <a href="@Url.Action("BlogDetails", "Extra", new { slug = blog.Slug })"
+                               class="btn btn-outline-primary btn-sm mt-auto">
+                                <i class="fa fa-book-open"></i> Đọc thêm
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            }
+
+        </div>
+    }
+
+</div>

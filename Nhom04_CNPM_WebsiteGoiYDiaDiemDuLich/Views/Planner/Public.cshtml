@@ -1,0 +1,59 @@
+﻿@model Nhom04_CNPM_WebsiteGoiYDiaDiemDuLich.Models.TravelPlan
+@{
+    ViewBag.Title = "Xem kế hoạch du lịch";
+}
+
+<div class="container py-4" style="max-width:900px;">
+
+    <h2 class="fw-bold mb-4">
+        <i class="fa fa-eye"></i> Xem kế hoạch du lịch
+    </h2>
+
+    <!-- THÔNG TIN KẾ HOẠCH -->
+    <div class="card shadow-sm border-0 mb-4">
+        <div class="card-body">
+
+            <h4 class="fw-bold">@Model.Title</h4>
+
+            <p>
+                <strong>Thời gian:</strong>
+                @string.Format("{0:dd/MM/yyyy} - {1:dd/MM/yyyy}", Model.StartDate, Model.EndDate)
+            </p>
+
+            <p><strong>Tổng chi phí:</strong> @String.Format("{0:N0} VNĐ", Model.TotalCost)</p>
+
+            <p><strong>Lịch trình:</strong> @Model.Itinerary</p>
+
+        </div>
+    </div>
+
+    <!-- ĐỊA ĐIỂM TRONG KẾ HOẠCH -->
+    <div class="card shadow-sm border-0 mb-4">
+        <div class="card-body">
+
+            <h5 class="fw-bold mb-3"><i class="fa fa-map-marker"></i> Địa điểm tham quan</h5>
+
+            @foreach (var item in Model.PlanItems)
+            {
+                <div class="border-bottom pb-2 mb-3">
+                    <p><strong>Ngày @item.DayNo:</strong></p>
+                    @*<p><strong>Địa điểm:</strong> @item.Place?.Title</p>*@
+
+                    @*<p><strong>Địa điểm:</strong></p>
+        <ul>
+            @foreach (var p in Model.PlanItems.OrderBy(p => p.DayNo))
+            {
+                <li>@(p.Place != null ? p.Place.Title : "Không có dữ liệu")</li>
+            }
+        </ul>*@
+
+                    @(item.Place != null ? item.Place.Title : "Không có dữ liệu")
+
+                    <p><strong>Ghi chú:</strong> @item.Notes</p>
+                </div>
+            }
+
+        </div>
+    </div>
+
+</div>

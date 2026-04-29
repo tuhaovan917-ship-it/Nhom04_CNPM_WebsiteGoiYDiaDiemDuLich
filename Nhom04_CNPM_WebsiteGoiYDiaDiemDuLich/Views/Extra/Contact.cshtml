@@ -1,0 +1,165 @@
+﻿@*@{
+        ViewBag.Title = "Liên hệ";
+    }
+
+    <div class="container py-4" style="max-width: 800px;">
+
+        <h2 class="fw-bold mb-4">
+            <i class="fa fa-envelope"></i> Liên hệ với chúng tôi
+        </h2>
+
+        <div class="card shadow-sm border-0 mb-4">
+            <div class="card-body">
+
+                <h5 class="fw-bold mb-3">Gửi tin nhắn</h5>
+
+                <form>
+
+                    <div class="mb-3">
+                        <label class="form-label">Họ tên</label>
+                        <input class="form-control form-control-lg" placeholder="Nhập họ tên" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-control form-control-lg" placeholder="example@gmail.com" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Nội dung</label>
+                        <textarea rows="4" class="form-control form-control-lg" placeholder="Nhập nội dung liên hệ"></textarea>
+                    </div>
+
+                    <button class="btn btn-primary btn-lg">
+                        <i class="fa fa-paper-plane"></i> Gửi liên hệ
+                    </button>
+
+                </form>
+
+            </div>
+        </div>
+
+        <div class="card shadow-sm border-0">
+            <div class="card-body">
+
+                <h5 class="fw-bold mb-3">Thông tin hỗ trợ</h5>
+
+                <p><i class="fa fa-map-marker"></i> 123 Đường ABC, TP. Hồ Chí Minh</p>
+                <p><i class="fa fa-envelope"></i> support@travel.com</p>
+                <p><i class="fa fa-phone"></i> 0123 456 789</p>
+
+            </div>
+        </div>
+
+    </div>*@
+
+@{
+    ViewBag.Title = "Liên hệ";
+}
+
+<div class="container py-4" style="max-width: 800px;">
+
+    <h2 class="fw-bold mb-4">
+        <i class="fa fa-envelope"></i> Liên hệ với chúng tôi
+    </h2>
+
+    @if (ViewBag.Error != null)
+    {
+        <div class="alert alert-danger">@ViewBag.Error</div>
+    }
+
+    @if (ViewBag.Success != null)
+    {
+        <div class="alert alert-success">@ViewBag.Success</div>
+    }
+
+    <div class="card shadow-sm border-0 mb-4">
+        <div class="card-body">
+
+            <h5 class="fw-bold mb-3">Gửi tin nhắn</h5>
+
+            @*@using (Html.BeginForm("Contact", "Extra", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="mb-3">
+                <label class="form-label">Họ tên</label>
+                <input name="FullName"
+                       class="form-control form-control-lg"
+                       placeholder="Nhập họ tên" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input name="Email"
+                       type="email"
+                       class="form-control form-control-lg"
+                       placeholder="example@gmail.com" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Nội dung</label>
+                <textarea name="Message"
+                          rows="4"
+                          class="form-control form-control-lg"
+                          placeholder="Nhập nội dung liên hệ"></textarea>
+            </div>
+
+            <button class="btn btn-primary btn-lg">
+                <i class="fa fa-paper-plane"></i> Gửi liên hệ
+            </button>
+        }*@
+
+            @using (Html.BeginForm("Contact", "Extra", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="mb-3">
+                    <label class="form-label">Họ tên</label>
+                    <input name="FullName"
+                           value="@Request["FullName"]"
+                           class="form-control form-control-lg"
+                           placeholder="Nhập họ tên" />
+                    @Html.ValidationMessage("FullName", "", new { @class = "text-danger" })
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Email</label>
+                    <input name="Email"
+                           type="email"
+                           value="@Request["Email"]"
+                           class="form-control form-control-lg"
+                           placeholder="example@gmail.com" />
+                    @Html.ValidationMessage("Email", "", new { @class = "text-danger" })
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Nội dung</label>
+                    <textarea name="Message"
+                              rows="4"
+                              class="form-control form-control-lg"
+                              placeholder="Nhập nội dung liên hệ">@Request["Message"]</textarea>
+                    @Html.ValidationMessage("Message", "", new { @class = "text-danger" })
+                </div>
+
+                <button class="btn btn-primary btn-lg">
+                    <i class="fa fa-paper-plane"></i> Gửi liên hệ
+                </button>
+            }
+
+        </div>
+    </div>
+
+    <div class="card shadow-sm border-0">
+        <div class="card-body">
+
+            <h5 class="fw-bold mb-3">Thông tin hỗ trợ</h5>
+
+            <p><i class="fa fa-map-marker"></i> 123 Đường ABC, TP. Hồ Chí Minh</p>
+            <p><i class="fa fa-envelope"></i> support@travel.com</p>
+            <p><i class="fa fa-phone"></i> 0123 456 789</p>
+
+        </div>
+    </div>
+
+</div>

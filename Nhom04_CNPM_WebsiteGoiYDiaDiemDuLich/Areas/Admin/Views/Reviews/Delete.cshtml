@@ -1,0 +1,31 @@
+﻿@model Nhom04_CNPM_WebsiteGoiYDiaDiemDuLich.Models.Review
+@{
+    ViewBag.Title = "Xóa bình luận";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h4 class="fw-bold text-danger mb-3">Xác nhận xóa bình luận</h4>
+
+<div class="alert alert-warning">
+    <p><b>Người dùng:</b> @(Model.User != null ? Model.User.FullName : "Ẩn danh")</p>
+    <p><b>Địa điểm:</b> @Model.Place.Title</p>
+    <p><b>Đánh giá:</b> @Model.Rating ★</p>
+    <p><b>Nội dung:</b></p>
+    <blockquote>
+        @(string.IsNullOrEmpty(Model.Comment) ? "(Không có nội dung)" : Model.Comment)
+    </blockquote>
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.ReviewId)
+
+    <button class="btn btn-danger">
+        <i class="fa fa-trash"></i> Xóa
+    </button>
+
+    <a href="/Admin/Reviews" class="btn btn-secondary">
+        Hủy
+    </a>
+}

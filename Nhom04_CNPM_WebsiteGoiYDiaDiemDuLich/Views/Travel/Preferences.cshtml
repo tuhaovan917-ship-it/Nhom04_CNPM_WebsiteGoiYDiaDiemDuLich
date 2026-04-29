@@ -1,0 +1,80 @@
+﻿@{
+    ViewBag.Title = "Nhập tiêu chí du lịch";
+    var cities = ViewBag.Cities as List<string> ?? new List<string> { "Hà Nội", "TP. Hồ Chí Minh", "Đà Nẵng" };
+    var types = ViewBag.TravelTypes as List<string> ?? new List<string> { "Phượt", "Gia đình", "Cặp đôi", "Nhóm bạn", "Cao cấp", "Tiết kiệm" };
+    var interests = ViewBag.Interests as List<string> ?? new List<string> { "Biển", "Núi", "Khám phá", "Nghỉ dưỡng", "Văn hóa - Lịch sử", "Ẩm thực" };
+}
+
+<div class="container py-5" style="max-width: 900px;">
+    <div class="card shadow-sm border-0">
+        <div class="card-body p-4">
+            <h2 class="fw-bold text-center mb-4">
+                <i class="fa fa-sliders-h"></i> Nhập tiêu chí du lịch
+            </h2>
+
+            @if (ViewBag.Errors != null)
+            {
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach (var err in (List<string>)ViewBag.Errors)
+                        {
+                            <li>@err</li>
+                        }
+                    </ul>
+                </div>
+            }
+
+            <form action="/Travel/Results" method="post">
+
+                <div class="mb-4">
+                    <label class="form-label fw-bold">Vị trí xuất phát</label>
+                    <select class="form-select form-select-lg" name="StartLocation" required>
+                        <option value="">-- Chọn vị trí --</option>
+                        @foreach (var c in cities)
+                        {
+                            <option>@c</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="mb-4">
+                    <label class="form-label fw-bold">Ngân sách dự kiến (VNĐ)</label>
+                    <input type="number" class="form-control form-control-lg" name="Budget" min="0" required />
+                </div>
+
+                <div class="mb-4">
+                    <label class="form-label fw-bold">Sở thích du lịch</label>
+                    <select class="form-select form-select-lg" name="Interests">
+                        <option value="">-- Chọn sở thích --</option>
+                        @foreach (var i in interests)
+                        {
+                            <option>@i</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="mb-4">
+                    <label class="form-label fw-bold">Loại hình du lịch</label>
+                    <select class="form-select form-select-lg" name="TravelType">
+                        <option value="">-- Chọn loại hình --</option>
+                        @foreach (var t in types)
+                        {
+                            <option>@t</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="mb-4">
+                    <label class="form-label fw-bold">Khoảng cách mong muốn (km)</label>
+                    <input type="number" class="form-control form-control-lg" name="Distance" min="1" required />
+                </div>
+
+                <div class="text-center mt-4">
+                    <button type="submit" class="btn btn-primary btn-lg px-5">
+                        <i class="fa fa-search"></i> Tìm gợi ý phù hợp
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title - Admin</title>
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+</head>
+<body>
+
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/Admin/Dashboard">
+                Admin Panel
+            </a>
+            <span class="text-light">
+                @User.Identity.Name
+            </span>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+
+            <!-- Sidebar -->
+            <div class="col-md-2 bg-light min-vh-100 p-3">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Admin/Dashboard">
+                            <i class="fa fa-chart-bar"></i> Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Admin/Places">
+                            <i class="fa fa-map-marker-alt"></i> Địa điểm
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Admin/Users">
+                            <i class="fa fa-users"></i> Người dùng
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Admin/Reviews">
+                            <i class="fa fa-comments"></i> Bình luận
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Content -->
+            <div class="col-md-10 p-4">
+                @RenderBody()
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

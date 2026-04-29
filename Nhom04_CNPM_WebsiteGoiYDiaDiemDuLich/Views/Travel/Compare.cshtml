@@ -1,0 +1,177 @@
+﻿@model List<Nhom04_CNPM_WebsiteGoiYDiaDiemDuLich.Models.Place>
+
+@{
+    ViewBag.Title = "So sánh địa điểm du lịch";
+    var allPlaces = ViewBag.AllPlaces as List<Nhom04_CNPM_WebsiteGoiYDiaDiemDuLich.Models.Place>;
+}
+
+<div class="container py-4">
+
+    <h2 class="fw-bold mb-4">
+        <i class="fa fa-balance-scale"></i> So sánh địa điểm du lịch
+    </h2>
+
+    <!-- Select area -->
+    <div class="card shadow-sm border-0 mb-4">
+        <div class="card-body">
+            <h5 class="fw-bold mb-3">Thêm địa điểm để so sánh</h5>
+
+            <form method="get" action="/Travel/Compare" class="row g-3">
+                <div class="col-md-8">
+                    <select name="addId" class="form-select form-select-lg" required>
+                        <option value="">-- Chọn địa điểm --</option>
+                        @foreach (var p in allPlaces)
+                        {
+                            <option value="@p.PlaceId">@p.Title</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="col-md-4 d-grid">
+                    <button class="btn btn-primary btn-lg">
+                        <i class="fa fa-plus"></i> Thêm vào bảng so sánh
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    @if (Model.Count == 0)
+    {
+        <div class="alert alert-info">
+            Chưa có địa điểm nào được chọn để so sánh.
+        </div>
+        return;
+    }
+
+    <!-- Comparison table -->
+    <div class="table-responsive">
+        <table class="table table-bordered align-middle text-center shadow-sm">
+
+            <thead class="table-dark">
+                <tr>
+                    <th style="width:18%">Tiêu chí</th>
+                    @foreach (var p in Model)
+                    {
+                        <th style="width:@(82 / Model.Count)%">@p.Title</th>
+                    }
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <!-- 1. Image -->
+                <tr>
+                    <th class="fw-bold">Hình ảnh</th>
+
+                    @foreach (var p in Model)
+                    {
+                        string img = "https://picsum.photos/500/300"; // fallback
+
+                        if (p.PlaceImages != null && p.PlaceImages.Any())
+                        {
+                            var image = p.PlaceImages.FirstOrDefault(i => i.IsPrimary)
+                                        ?? p.PlaceImages.First();
+
+                            if (!string.IsNullOrEmpty(image.ImageUrl))
+                            {
+                                img = image.ImageUrl.StartsWith("http")
+                                    ? image.ImageUrl
+                                    : Url.Content("~/Content/Images/" + image.ImageUrl);
+                            }
+                        }
+
+                        <td>
+                            <img src="@img"
+                                 class="img-fluid rounded shadow"
+                                 style="max-width:220px; height:auto; object-fit:cover;" />
+                        </td>
+                    }
+                </tr>
+
+                <!-- 2. Rating -->
+                <tr>
+                    <th class="fw-bold">Đánh giá</th>
+                    @foreach (var p in Model)
+                    {
+                        decimal rating = p.Reviews.Any()
+                            ? p.Reviews.Average(r => r.Rating)
+                            : 0;
+
+                        <td>
+                            <span class="badge bg-warning text-dark p-2">
+                                @(rating.ToString("0.0")) ★
+                            </span>
+                        </td>
+                    }
+                </tr>
+
+                <!-- 3. Loại hình -->
+                <tr>
+                    <th class="fw-bold">Loại hình du lịch</th>
+                    @foreach (var p in Model)
+                    {
+                        <td>@(p.PlaceType?.Name ?? "Không có")</td>
+                    }
+                </tr>
+
+                <!-- 4. Mô tả -->
+                <tr>
+                    <th class="fw-bold">Mô tả ngắn</th>
+                    @foreach (var p in Model)
+                    {
+                        var shortDes = string.IsNullOrEmpty(p.ShortDescription)
+                            ? (p.Description?.Length > 120
+                                ? p.Description.Substring(0, 120) + "..."
+                                : p.Description)
+                            : p.ShortDescription;
+
+                        <td>@shortDes</td>
+                    }
+                </tr>
+
+                <!-- 5. Chi phí -->
+                <tr>
+                    <th class="fw-bold">Chi phí dự kiến</th>
+                    @foreach (var p in Model)
+                    {
+                        <td>
+                            @(p.AvgCost != null
+                                ? $"{p.AvgCost:0,0} VNĐ"
+                                : "Không có dữ liệu")
+                        </td>
+                    }
+                </tr>
+
+                <!-- 6. Chi tiết -->
+                <tr>
+                    <th class="fw-bold">Xem chi tiết</th>
+                    @foreach (var p in Model)
+                    {
+                        <td>
+                            <a href="/Travel/Details/@p.PlaceId"
+                               class="btn btn-outline-primary btn-sm">
+                                Xem
+                            </a>
+                        </td>
+                    }
+                </tr>
+
+                <!-- 7. Remove -->
+                <tr class="bg-light">
+                    <th class="fw-bold">Xóa</th>
+                    @foreach (var p in Model)
+                    {
+                        <td>
+                            <a href="/Travel/Compare?removeId=@p.PlaceId"
+                               class="btn btn-danger btn-sm">
+                                <i class="fa fa-times"></i> Xóa
+                            </a>
+                        </td>
+                    }
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>

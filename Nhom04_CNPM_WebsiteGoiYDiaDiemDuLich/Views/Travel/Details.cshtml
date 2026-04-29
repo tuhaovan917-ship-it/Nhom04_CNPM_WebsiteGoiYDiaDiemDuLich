@@ -1,0 +1,230 @@
+﻿@model Nhom04_CNPM_WebsiteGoiYDiaDiemDuLich.Models.Place
+@{
+    ViewBag.Title = Model.Title;
+}
+
+<div class="container py-4">
+
+    <!-- TITLE -->
+    <h2 class="fw-bold mb-3">
+        <i class="fa fa-map-marker-alt"></i> @Model.Title
+    </h2>
+
+    <!-- IMAGE GALLERY -->
+    <div class="row mb-4">
+
+        <!-- MAIN IMAGE -->
+        <div class="col-md-8">
+            @{
+                string mainImgUrl = "https://picsum.photos/900/500";
+
+                if (Model.PlaceImages != null && Model.PlaceImages.Any())
+                {
+                    var img = Model.PlaceImages.FirstOrDefault(i => i.IsPrimary)
+                              ?? Model.PlaceImages.First();
+
+                    if (!string.IsNullOrEmpty(img.ImageUrl))
+                    {
+                        mainImgUrl = img.ImageUrl.StartsWith("http")
+                            ? img.ImageUrl
+                            : Url.Content("~/Content/Images/" + img.ImageUrl);
+                    }
+                }
+            }
+
+            <img src="@mainImgUrl"
+                 class="img-fluid rounded shadow-sm"
+                 style="height:420px;object-fit:cover;" />
+        </div>
+
+        <!-- SUB IMAGES -->
+        <div class="col-md-4">
+            @if (Model.PlaceImages != null)
+            {
+                foreach (var img in Model.PlaceImages
+                    .Where(i => !i.IsPrimary)
+                    .Take(2))
+                {
+                    string subImgUrl = img.ImageUrl.StartsWith("http")
+                        ? img.ImageUrl
+                        : Url.Content("~/Content/Images/" + img.ImageUrl);
+
+                    <img src="@subImgUrl"
+                         class="img-fluid rounded mb-2 shadow-sm"
+                         style="height:200px;object-fit:cover;" />
+                }
+            }
+        </div>
+    </div>
+
+    <!-- ACTION BUTTONS -->
+    <div class="mb-4">
+
+        <!-- FAVORITE -->
+        <form action="/User/AddFavorite" method="post" style="display:inline;">
+            <input type="hidden" name="placeId" value="@Model.PlaceId" />
+            <button class="btn btn-primary me-2">
+                <i class="fa fa-heart"></i> Thêm vào Yêu thích
+            </button>
+        </form>
+
+        <!-- COMPARE -->
+        <a href="/Travel/Compare?addId=@Model.PlaceId"
+           class="btn btn-outline-secondary">
+            <i class="fa fa-balance-scale"></i> So sánh
+        </a>
+    </div>
+
+    <div class="row">
+
+        <!-- LEFT COLUMN -->
+        <div class="col-lg-8">
+
+            <!-- DESCRIPTION -->
+            <div class="card shadow-sm border-0 mb-4">
+                <div class="card-body">
+                    <h4 class="fw-bold mb-3">Mô tả chi tiết</h4>
+                    <p class="text-muted">@Model.Description</p>
+                </div>
+            </div>
+
+            <!-- REVIEWS -->
+            <div class="card shadow-sm border-0 mb-4">
+                <div class="card-body">
+                    <h4 class="fw-bold mb-3">Đánh giá & bình luận</h4>
+
+                    @{
+                        decimal avgRating = Model.Reviews.Any()
+                            ? Model.Reviews.Average(r => r.Rating)
+                            : 0;
+                    }
+
+                    <span class="badge bg-warning text-dark mb-3">
+                        <i class="fa fa-star"></i> @avgRating.ToString("0.0") / 5
+                    </span>
+
+                    <!-- ADD REVIEW -->
+                    <form method="post" action="/Travel/AddReview">
+                        <input type="hidden" name="PlaceId" value="@Model.PlaceId" />
+
+                        <textarea class="form-control mb-2"
+                                  name="Comment"
+                                  rows="3"
+                                  placeholder="Viết đánh giá..."
+                                  required></textarea>
+
+                        <select class="form-select mb-2" name="Rating" required>
+                            <option value="">-- Chọn số sao --</option>
+                            @for (int i = 1; i <= 5; i++)
+                            {
+                                <option value="@i">@i</option>
+                            }
+                        </select>
+
+                        <button class="btn btn-primary">Gửi đánh giá</button>
+                    </form>
+
+                    <hr />
+
+                    <!-- LIST REVIEWS -->
+                    @foreach (var r in Model.Reviews.OrderByDescending(r => r.CreatedAt))
+                    {
+                        <div class="border rounded p-3 mb-2">
+                            <strong>@r.User.FullName</strong>
+                            <span class="text-muted">
+                                – @r.CreatedAt.ToString("dd/MM/yyyy")
+                            </span>
+                            <p class="mb-0">@r.Comment</p>
+                        </div>
+                    }
+                </div>
+            </div>
+
+        </div>
+
+        <!-- RIGHT COLUMN -->
+        <div class="col-lg-4">
+
+            <!-- INFO -->
+            <div class="card shadow-sm border-0 mb-4">
+                <div class="card-body">
+                    <h5 class="fw-bold mb-3">Thông tin chi tiết</h5>
+
+                    <p>
+                        <strong>Loại hình:</strong>
+                        <span class="badge bg-info text-dark">
+                            @(Model.PlaceType?.Name ?? "Không có dữ liệu")
+                        </span>
+                    </p>
+
+                    <p><strong>Địa chỉ:</strong> @Model.Address</p>
+                    <p><strong>Thành phố:</strong> @Model.City</p>
+
+                    <p>
+                        <strong>Chi phí trung bình:</strong>
+                        @((Model.AvgCost ?? 0).ToString("#,##0")) VNĐ
+                    </p>
+                </div>
+            </div>
+
+            <!-- MAP -->
+            @if (Model.Latitude.HasValue && Model.Longitude.HasValue)
+            {
+                <div class="card shadow-sm border-0 mb-4">
+                    <div class="card-body">
+                        <h5 class="fw-bold mb-3">Bản đồ vị trí</h5>
+
+                        <div class="ratio ratio-4x3">
+                            <iframe src="https://maps.google.com/maps?q=@Model.Latitude,@Model.Longitude&z=13&output=embed"
+                                    class="rounded border">
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
+            }
+
+            <!-- SIMILAR PLACES -->
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <h5 class="fw-bold mb-3">Địa điểm tương tự</h5>
+
+                    <ul class="list-group list-group-flush">
+                        @foreach (var sim in
+                            (Model.PlaceType?.Places ?? new List<Nhom04_CNPM_WebsiteGoiYDiaDiemDuLich.Models.Place>())
+                            .Where(p => p.PlaceId != Model.PlaceId)
+                            .Take(3))
+                        {
+                            string simImgUrl = "https://picsum.photos/100";
+
+                            if (sim.PlaceImages != null && sim.PlaceImages.Any())
+                            {
+                                var img = sim.PlaceImages.FirstOrDefault(i => i.IsPrimary)
+                                          ?? sim.PlaceImages.First();
+
+                                simImgUrl = img.ImageUrl.StartsWith("http")
+                                    ? img.ImageUrl
+                                    : Url.Content("~/Content/Images/" + img.ImageUrl);
+                            }
+
+                            <li class="list-group-item d-flex align-items-center">
+                                <img src="@simImgUrl"
+                                     class="rounded me-3"
+                                     style="width:70px;height:70px;object-fit:cover;" />
+
+                                <div>
+                                    <strong>@sim.Title</strong><br />
+                                    <small class="text-muted">
+                                        @(sim.Reviews.Any()
+                                            ? sim.Reviews.Average(r => r.Rating).ToString("0.0")
+                                            : "0.0") ★
+                                    </small>
+                                </div>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

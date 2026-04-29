@@ -1,0 +1,143 @@
+﻿@{
+    Layout = null;
+    bool isLogged = Session["UserId"] != null;
+    string userName = Session["FullName"] != null ? Session["FullName"].ToString() : "Tài khoản";
+}
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewBag.Title - Gợi ý du lịch</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+    <style>
+        body {
+            background-color: #f9fafb;
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 22px;
+            color: #0d6efd !important;
+        }
+
+        footer {
+            background: #0d6efd;
+            color: white;
+            padding: 25px 0;
+            margin-top: 50px;
+        }
+
+        .footer-link {
+            color: #dce6ff;
+            text-decoration: none;
+        }
+
+            .footer-link:hover {
+                color: #fff;
+                text-decoration: underline;
+            }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+        <div class="container">
+            <a class="navbar-brand" href="/">TravelSuggest</a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#mainNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="mainNavbar">
+
+                <!-- Left -->
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Travel/Preferences">Nhập tiêu chí</a>
+                    </li>
+
+                    @*<li class="nav-item">
+                        <a class="nav-link" href="/Travel/Recommendations">Gợi ý địa điểm</a>
+                    </li>*@
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Travel/Compare">So sánh</a>
+                    </li>
+
+                    @if (isLogged)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" href="/User/Favorites">Yêu thích</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Planner/Create">Tạo kế hoạch</a>
+                        </li>
+                    }
+                </ul>
+
+                <!-- Right -->
+                <ul class="navbar-nav">
+
+                    @if (isLogged)
+                    {
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle fw-bold" href="#" id="accDrop"
+                               data-bs-toggle="dropdown">
+                                <i class="fa fa-user-circle"></i> @userName
+                            </a>
+
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="/Profile/Index">Trang cá nhân</a></li>
+                                @*<li><a class="dropdown-item" href="/User/Favorites">Địa điểm yêu thích</a></li>*@
+                                <li><hr class="dropdown-divider" /></li>
+                                <li><a class="dropdown-item text-danger" href="/Account/Logout">Đăng xuất</a></li>
+                            </ul>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="btn btn-primary ms-2" href="/Account/Login">
+                                <i class="fa fa-user"></i> Đăng nhập
+                            </a>
+                        </li>
+                    }
+
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN -->
+    <main class="container mt-4 mb-5">
+        @RenderBody()
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container text-center">
+            <p class="mb-1">© 2025 TravelSuggest - Website gợi ý địa điểm du lịch</p>
+
+            <a href="/Extra/Blog" class="footer-link me-3">Blog</a>
+            <a href="/Extra/About" class="footer-link me-3">Giới thiệu</a>
+            <a href="/Extra/Contact" class="footer-link">Liên hệ</a>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

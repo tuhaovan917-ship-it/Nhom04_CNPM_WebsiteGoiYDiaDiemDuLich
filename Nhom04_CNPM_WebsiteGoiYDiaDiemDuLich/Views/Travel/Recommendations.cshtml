@@ -1,0 +1,81 @@
+﻿@using Nhom04_CNPM_WebsiteGoiYDiaDiemDuLich.Models;
+@model List<RecommendResultDTO>
+
+@{
+    ViewBag.Title = "Kết quả gợi ý du lịch";
+}
+
+<div class="container py-4">
+    <h2 class="fw-bold mb-3">
+        <i class="fa fa-map-marked-alt"></i> Kết quả gợi ý phù hợp
+    </h2>
+
+    @if (Model == null || Model.Count == 0)
+    {
+        <div class="alert alert-warning">Không tìm thấy địa điểm phù hợp.</div>
+    }
+    else
+    {
+        <div class="row row-cols-1 row-cols-md-3 g-4">           
+            @foreach (var item in Model)
+            {
+                var p = item.Place;
+
+                string img = "https://picsum.photos/500/300"; // fallback
+
+                if (p.PlaceImages != null && p.PlaceImages.Any())
+                {
+                    var image = p.PlaceImages.FirstOrDefault(i => i.IsPrimary)
+                                ?? p.PlaceImages.First();
+
+                    if (!string.IsNullOrEmpty(image.ImageUrl))
+                    {
+                        img = image.ImageUrl.StartsWith("http")
+                            ? image.ImageUrl
+                            : Url.Content("~/Content/Images/" + image.ImageUrl);
+                    }
+                }
+
+
+                <div class="col">
+                    <div class="card h-100 shadow-sm border-0">
+                        <img src="@img" class="card-img-top" style="height:200px;object-fit:cover;" />
+
+                        <div class="card-body">
+                            <h5 class="fw-bold">@p.Title</h5>
+                            <p class="text-muted">@p.ShortDescription</p>
+
+                            <div class="mb-2">
+                                <span class="badge bg-warning text-dark me-1">
+                                    <i class="fa fa-star"></i> @(p.AvgRating?.ToString("0.0") ?? "0.0")
+                                </span>
+
+                                <span class="badge bg-success text-white me-1" title="Điểm gợi ý tổng hợp">
+                                    <i class="fa fa-trophy"></i> @item.Score
+                                </span>
+
+                                <span class="badge bg-info text-dark">
+                                    <i class="fa fa-road"></i> @item.Distance km
+                                </span>
+                            </div>
+
+                            @if (p.PlaceType != null)
+                            {
+                                <div class="mb-2">
+                                    <span class="badge bg-secondary">
+                                        <i class="fa fa-tags"></i> @p.PlaceType.Name
+                                    </span>
+                                </div>
+                            }
+
+                            <a href="/Travel/Details/@p.PlaceId" class="btn btn-outline-primary w-100">
+                                <i class="fa fa-info-circle"></i> Xem chi tiết
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                }
+
+        </div>
+    }
+</div>
