@@ -6,32 +6,84 @@
 
 ## 🚀 Tính Năng Chính
 
-Dự án hiện thực hóa các nghiệp vụ cốt lõi sau:
 - **Quản lý người dùng:** Đăng ký, đăng nhập, bảo mật tài khoản và cá nhân hóa hồ sơ.
-- **Tìm kiếm & Bộ lọc thông minh:** Tra cứu địa điểm theo tên, khu vực, mức giá, và loại hình du lịch (biển, núi, ẩm thực...).
-- **Hệ thống gợi ý:** Đề xuất điểm đến dựa trên sở thích cá nhân, lịch sử tương tác hoặc các địa điểm đang là xu hướng.
-- **Lập kế hoạch du lịch:** Cho phép người dùng tạo lịch trình chi tiết, quản lý danh sách yêu thích và đánh dấu các điểm đã đi.
-- **Tương tác cộng đồng:** Đánh giá (1-5 sao) và bình luận thực tế về các địa điểm.
-- **Quản trị hệ thống (Admin):** Công cụ mạnh mẽ để quản lý dữ liệu địa điểm, duyệt nội dung và theo dõi xu hướng người dùng.
+- **Tìm kiếm & Bộ lọc thông minh:** Tra cứu địa điểm theo tên, khu vực, mức giá, và loại hình du lịch.
+- **Hệ thống gợi ý:** Đề xuất điểm đến dựa trên sở thích cá nhân và xu hướng.
+- **Lập kế hoạch du lịch:** Tạo lịch trình chi tiết, quản lý danh sách yêu thích.
+- **Tương tác cộng đồng:** Đánh giá (1-5 sao) và bình luận về các địa điểm.
+- **Quản trị hệ thống (Admin):** Công cụ quản lý dữ liệu địa điểm, người dùng và nội dung.
+
+---
 
 ## 🛠 Công Nghệ Sử Dụng
 
-Website được phát triển dựa trên các công nghệ hiện đại, đảm bảo tính ổn định và khả năng mở rộng:
 - **Backend:** ASP.NET MVC (C#)
 - **Frontend:** HTML5, CSS3, Razor View Engine, Bootstrap, jQuery.
 - **Database:** Microsoft SQL Server.
 - **Tools:** Visual Studio 2022, GitHub, Figma.
 
-## 📂 Cấu Trúc Cơ Sở Dữ Liệu
+---
 
-Hệ thống sử dụng mô hình cơ sở dữ liệu quan hệ (RDBMS) với các thực thể chính:
-- **Người dùng:** Quản lý tài khoản và phân quyền (User/Admin).
-- **Địa điểm:** Lưu trữ thông tin chi tiết, hình ảnh, tọa độ và phân loại.
-- **Tương tác:** Lưu trữ đánh giá, bình luận và danh sách yêu thích của người dùng.
-- **Kế hoạch:** Quản lý lịch trình du lịch cá nhân.
+## 📸 Giao Diện Ứng Dụng (Screenshots)
+
+### 🏠 1. Trải nghiệm Người dùng (User Interface)
+<details>
+  <summary><b>Trang chủ & Tìm kiếm (5 ảnh)</b></summary>
+  <br>
+  <p align="center">
+    <img src="Nhom04_CNPM_WebsiteGoiYDiaDiemDuLich/screenshots/home-1.png" width="32%"> <img src="Nhom04_CNPM_WebsiteGoiYDiaDiemDuLich/screenshots/home-2.png" width="32%"> <img src="Nhom04_CNPM_WebsiteGoiYDiaDiemDuLich/screenshots/home-3.png" width="32%">
+    <br><br>
+    <img src="Nhom04_CNPM_WebsiteGoiYDiaDiemDuLich/screenshots/search.png" width="48%"> <img src="Nhom04_CNPM_WebsiteGoiYDiaDiemDuLich/screenshots/search-result.png" width="48%">
+     <br><i>Trang chủ và tìm kiếm</i>
+  </p>
+</details>
+
+<details>
+  <summary><b>Chi tiết & So sánh địa điểm (3 ảnh)</b></summary>
+  <br>
+  <p align="center">
+    <img src="Nhom04_CNPM_WebsiteGoiYDiaDiemDuLich/screenshots/detail-1.png" width="48%"> <img src="Nhom04_CNPM_WebsiteGoiYDiaDiemDuLich/screenshots/detail-2.png" width="48%">
+    <br><br>
+    <img src="Nhom04_CNPM_WebsiteGoiYDiaDiemDuLich/screenshots/compare.png" width="90%">
+    <br><i>Hệ thống so sánh các tiêu chí du lịch thông minh và xem chi tiết địa điểm</i>
+  </p>
+</details>
+
+<details>
+  <summary><b>Lập kế hoạch & Trang cá nhân (4 ảnh)</b></summary>
+  <br>
+  <p align="center">
+    <img src="Nhom04_CNPM_WebsiteGoiYDiaDiemDuLich/screenshots/plan.png" width="90%">
+    <br><br>
+    <img src="Nhom04_CNPM_WebsiteGoiYDiaDiemDuLich/screenshots/create-plan-1.png" width="32%"> <img src="Nhom04_CNPM_WebsiteGoiYDiaDiemDuLich/screenshots/create-plan-2.png" width="32%"> <img src="Nhom04_CNPM_WebsiteGoiYDiaDiemDuLich/screenshots/profile-place-saved.png" width="32%">
+    <br><i>Quản lý lịch trình cá nhân và lưu trữ địa điểm yêu thích</i>
+  </p>
+</details>
+
+### 🛠️ 2. Hệ thống Quản trị (Admin)
+<details>
+  <summary><b>Quản lý nghiệp vụ (1 ảnh)</b></summary>
+  <br>
+  <p align="center">
+    <img src="Nhom04_CNPM_WebsiteGoiYDiaDiemDuLich/screenshots/admin-place-management.png" width="90%">
+    <br><i>Giao diện CRUD địa điểm dành cho Quản trị viên</i>
+  </p>
+</details>
+
+---
+
+## 💡 Điểm Nhấn Kỹ Thuật (Technical Highlights)
+
+Trong dự án này, mình đã tập trung giải quyết các bài toán kỹ thuật sau:
+1. **Thiết kế Database tối ưu:** Xây dựng mô hình quan hệ (RDBMS) chặt chẽ để quản lý đa dạng thực thể (User, Place, Plan, Review).
+2. **Xử lý Logic Phức tạp:** Hiện thực hóa tính năng **So sánh địa điểm** và **Lập kế hoạch du lịch**, yêu cầu kỹ năng truy vấn dữ liệu nâng cao và xử lý mảng/đối tượng trong C#.
+3. **Phân quyền người dùng (Authorization):** Tách biệt hoàn toàn luồng giao diện và quyền hạn giữa người dùng thông thường và Quản trị viên (Admin).
+4. **Giao diện Responsive:** Sử dụng Bootstrap giúp website hiển thị tốt trên nhiều kích thước màn hình khác nhau.
+
+---
 
 ## 💻 Cài Đặt
 
 1. **Clone repository:**
    ```bash
-   git clone [https://github.com/username/travel-suggest.git](https://github.com/username/travel-suggest.git)
+   git clone https://github.com/tuhaovan917-ship-it/Nhom04_CNPM_WebsiteGoiYDiaDiemDuLich.git
