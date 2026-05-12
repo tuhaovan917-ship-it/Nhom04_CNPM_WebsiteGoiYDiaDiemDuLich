@@ -24,7 +24,7 @@
 
 ---
 
-## 📸 Giao Diện Ứng Dụng (Screenshots)
+## 📸 Giao Diện Ứng Dụng Tiêu Biểu (Screenshots)
 
 ### 🏠 1. Trải nghiệm Người dùng (User Interface)
 <details>
