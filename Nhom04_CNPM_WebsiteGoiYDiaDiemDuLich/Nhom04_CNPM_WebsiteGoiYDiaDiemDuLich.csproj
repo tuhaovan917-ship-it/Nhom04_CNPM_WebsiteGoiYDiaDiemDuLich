@@ -252,6 +252,19 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <Content Include="screenshots\admin-place-management.png" />
+    <Content Include="screenshots\compare.png" />
+    <Content Include="screenshots\create-plan-1.png" />
+    <Content Include="screenshots\create-plan-2.png" />
+    <Content Include="screenshots\detail-1.png" />
+    <Content Include="screenshots\detail-2.png" />
+    <Content Include="screenshots\home-1.png" />
+    <Content Include="screenshots\home-2.png" />
+    <Content Include="screenshots\home-3.png" />
+    <Content Include="screenshots\plan.png" />
+    <Content Include="screenshots\profile-place-saved.png" />
+    <Content Include="screenshots\search-result.png" />
+    <Content Include="screenshots\search.png" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
