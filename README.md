@@ -4,6 +4,38 @@
 
 ---
 
+## 📂 Cấu trúc thư mục (Folder Structure)
+
+Dự án được xây dựng dựa trên kiến trúc **ASP.NET MVC 5**, đảm bảo sự tách biệt giữa logic xử lý, dữ liệu và giao diện.
+
+```text
+Nhom04_CNPM_WebsiteGoiYDiaDiemDuLich/
+├── App_Start/              # Cấu hình khởi tạo hệ thống (Route, Bundle, Filter)
+├── Areas/
+│   └── Admin/              # Phân hệ Quản trị dành cho Admin (Dashboard, CRUD)
+│       ├── Controllers/    # Xử lý nghiệp vụ quản lý địa điểm, người dùng, đánh giá
+│       └── Views/          # Giao diện dành riêng cho quản trị viên
+├── Content/                # Tài nguyên tĩnh (CSS, Images, Web Fonts)
+│   ├── Images/             # Chứa các hình ảnh tĩnh của hệ thống
+│   └── bootstrap.css       # Thư viện UI Framework chính
+├── Controllers/            # Điều hướng và xử lý logic cho người dùng (User)
+│   ├── AccountController.cs   # Quản lý Đăng nhập, Đăng ký, Bảo mật
+│   ├── TravelController.cs    # Logic So sánh, Gợi ý và Chi tiết địa điểm
+│   ├── PlannerController.cs   # Xử lý lập kế hoạch và lịch trình du lịch
+│   └── ...                    # Các Controller bổ trợ (Home, Profile, User, Extra)
+├── Models/                 # Định nghĩa thực thể dữ liệu và ViewModels
+│   ├── Model1.edmx         # Entity Framework (Kết nối trực tiếp SQL Server)
+│   └── ViewModels/         # Các Model tùy chỉnh để tối ưu hiển thị giao diện
+├── Scripts/                # Các tệp xử lý JavaScript và thư viện Client-side
+├── Views/                  # Giao diện người dùng cuối (Razor View Engine)
+│   ├── Shared/             # Các Layout dùng chung (_Layout.cshtml, Navigation)
+│   ├── Travel/             # Giao diện trang So sánh và Gợi ý
+│   ├── Planner/            # Giao diện Lập kế hoạch và Chia sẻ lịch trình
+│   └── ...                 # Giao diện các trang Account, Profile, Home, Extra
+├── screenshots/            # Hình ảnh minh họa phục vụ tài liệu hướng dẫn
+└── Web.config              # Tệp cấu hình hệ thống và chuỗi kết nối Database
+```
+
 ## 🚀 Tính Năng Chính
 
 - **Quản lý người dùng:** Đăng ký, đăng nhập, bảo mật tài khoản và cá nhân hóa hồ sơ.
@@ -82,8 +114,69 @@ Trong dự án này, mình đã tập trung giải quyết các bài toán kỹ 
 
 ---
 
-## 💻 Cài Đặt
+## 💻 Cài Đặt (Installation)
 
-1. **Clone repository:**
-   ```bash
-   git clone https://github.com/tuhaovan917-ship-it/Nhom04_CNPM_WebsiteGoiYDiaDiemDuLich.git
+### 1. Tiền đề (Prerequisites)
+
+Để khởi chạy dự án, máy tính của bạn cần có:
+
+- **Visual Studio 2022** (hoặc 2019) có cài đặt workload *ASP.NET and web development*
+- **SQL Server Management Studio (SSMS)** hoặc SQL Server Express
+- **.NET Framework 4.7.2** hoặc phiên bản tương đương
+
+### 2. Các bước thực hiện
+
+#### Bước 1: Tải mã nguồn về máy
+
+```bash
+git clone https://github.com/tuhaovan917-ship-it/Nhom04_CNPM_WebsiteGoiYDiaDiemDuLich.git
+cd Nhom04_CNPM_WebsiteGoiYDiaDiemDuLich
+```
+
+#### Bước 2: Thiết lập Cơ sở dữ liệu
+
+1. Mở **SQL Server Management Studio (SSMS)**
+2. Tạo một Database mới với tên: `TravelSuggestDB`
+3. Mở và thực thi (Execute) tệp script SQL (`SQLQueryTravelSuggest.sql`, `SQLQueryInsertData.sql`) để khởi tạo bảng và dữ liệu mẫu
+
+#### Bước 3: Cấu hình Chuỗi kết nối (Connection String)
+
+1. Mở file solution (`.sln`) bằng Visual Studio
+2. Tìm đến file `Web.config` trong thư mục gốc
+3. Cập nhật thuộc tính `connectionString` trong thẻ `<connectionStrings>` sao cho khớp với tên SQL Server trên máy của bạn
+
+```xml
+<add name="Model1"
+     connectionString="metadata=res://*/Models.Model1.csdl|...;
+     provider=System.Data.SqlClient;
+     provider connection string=&quot;
+     data source=TEN_MAY_CUA_BAN\SQLEXPRESS;
+     initial catalog=TravelSuggestDB;
+     integrated security=True;
+     MultipleActiveResultSets=True;
+     App=EntityFramework&quot;"
+     providerName="System.Data.EntityClient" />
+```
+
+> **Lưu ý:** Thay `TEN_MAY_CUA_BAN\SQLEXPRESS` bằng tên SQL Server thực tế trên máy của bạn.
+
+#### Bước 4: Khởi chạy dự án
+
+1. Chuột phải vào **Solution** → chọn **Restore NuGet Packages**
+2. Nhấn **F5** hoặc chọn **Start (IIS Express)** để chạy website
+
+---
+
+## 🔑 Tài Khoản Thử Nghiệm (Test Accounts)
+
+| Vai trò | Email | Mật khẩu |
+|---|---|---|
+| **Quản trị viên (Admin)** | `admin@travelsuggest.com` | `admin123` |
+| **Người dùng (User)** | `user@gmail.com` | `123456` |
+
+---
+
+## 💡 Mẹo Khi Phát Triển
+
+- **NuGet Restore:** Nếu project báo lỗi thư viện khi vừa mở, hãy chọn **Build Solution** để Visual Studio tự động tải lại package còn thiếu.
+- **Database First (.edmx):** Nếu thay đổi cấu trúc Database trong SQL Server, hãy mở file `.edmx` → chuột phải → chọn **Update Model from Database** để đồng bộ dữ liệu vào project.
