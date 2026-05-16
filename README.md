@@ -172,7 +172,6 @@ cd Nhom04_CNPM_WebsiteGoiYDiaDiemDuLich
 | Vai trò | Email | Mật khẩu |
 |---|---|---|
 | **Quản trị viên (Admin)** | `admin@travelsuggest.com` | `admin123` |
-| **Người dùng (User)** | `user@gmail.com` | `123456` |
 
 ---
 
